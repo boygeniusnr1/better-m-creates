@@ -9,6 +9,8 @@
     "astro": "astro"
   },
   "dependencies": {
-    "astro": "^5.8.0"
+    "astro": "^5.8.0",
+    "astro-google-fonts-optimizer": "^0.2.2",
+    "astro-page-insight": "^0.10.2"
   }
 }
