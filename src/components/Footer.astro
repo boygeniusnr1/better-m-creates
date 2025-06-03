@@ -1,0 +1,86 @@
+<footer>
+  <div class="footer-content">
+    <div class="footer-links">
+      <a href="/">Home</a>
+      <a href="/volunteer">Volunteer</a>
+      <a href="/swaps">Swaps</a>
+      <a href="/contact">Contact</a>
+    </div>
+    <p>The Clothes Swap Club.</p>
+  </div>
+</footer>
+
+<style>
+  footer {
+    background-color: #f3f4f6; /* Light gray, matches your body background */
+    color: var(--text-color);
+    padding: 2rem 1rem; /* Vertical and horizontal padding */
+    margin-top: 4rem; /* Add some space above the footer from the last section */
+    width: 100%; /* Ensure it spans the full width of the viewport */
+    text-align: center; /* Default text alignment for small screens */
+  }
+
+  .footer-content {
+    max-width: 960px; /* Constrain content width to match other sections */
+    margin: 0 auto; /* Center the content within the footer */
+    display: flex;
+    flex-direction: column; /* Stack items vertically on small screens */
+    align-items: center; /* Center items horizontally when stacked */
+    gap: 1.5rem; /* Space between content blocks (links, social, copyright) */
+  }
+
+  .footer-links {
+    display: flex;
+    flex-wrap: wrap; /* Allow links to wrap to the next line */
+    justify-content: center; /* Center links when they wrap */
+    gap: 1rem; /* Space between individual links */
+  }
+
+  .footer-links a {
+    color: var(--text-color);
+    text-decoration: none;
+    font-size: 1rem;
+    font-weight: 500;
+    transition: color 0.3s ease;
+  }
+
+  .footer-links a:hover {
+    color: var(--accent-color); /* Use your defined accent color on hover */
+  }
+
+  /* If you decide to add social icons/text, uncomment and style this */
+  /*
+  .footer-social {
+    display: flex;
+    gap: 1rem;
+  }
+  .footer-social a {
+    color: var(--text-color);
+    font-size: 1.5rem;
+    transition: color 0.3s ease;
+  }
+  .footer-social a:hover {
+    color: var(--accent-color);
+  }
+  */
+
+  /* Removed: footer p styling */
+
+  /* Responsive adjustments for larger screens */
+  @media (min-width: 768px) {
+    .footer-content {
+      flex-direction: row; /* Layout items in a row */
+      justify-content: center; /* Center all remaining content blocks */
+      gap: 2.5rem; /* Increased gap for better spacing */
+      padding: 0 1rem; /* Add some side padding if content isn't flush with max-width */
+    }
+
+    .footer-links {
+      justify-content: center; /* Ensure links themselves are centered */
+      flex-grow: 0; /* No longer need to grow to fill space */
+      text-align: center;
+    }
+
+    /* Removed social and copyright specific alignment */
+  }
+</style>

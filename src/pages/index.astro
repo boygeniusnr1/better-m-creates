@@ -2,105 +2,406 @@
 import Layout from "../layouts/Layout.astro";
 const pageTitle = "Home - Clothes Swap Club";
 import { Picture } from "astro:assets";
-import HeroImage from "../assets/hero.webp";
+import HowItWorksImage from "../assets/how-it-works.webp";
+import UpcomingSwapsImage from "../assets/upcoming-swaps.webp";
 ---
 
 <Layout pageTitle={pageTitle}>
-  <div class="container" id="hero">
-    <Picture
-      src={HeroImage}
-      formats={["webp"]}
-      alt="People enjoying a clothing swap"
-      class="hero-image"
-      loading="eager"
-      fetchpriority="high"
-    />
-    <div class="hero-text-container">
-      <h1 class="hero-text auto-margin">CLOTHES SWAP CLUB</h1>
-      <p class="hero-p auto-margin">
-        Welcome to the Clothes Swap Club. You don’t need to become a member to
-        swap, but if you’d like to be the first receive the latest news and
-        updates, you can join the club!
+  <div class="content">
+    <div class="hero-container">
+      <div class="hero-background"></div>
+      <div class="hero-content">
+        <h1>Welcome to the Clothes Swap Club!</h1>
+        <p>
+          You don’t need to become a member to swap, but if you’d like to be the
+          first to receive the latest news and updates, you can join the club!
+        </p>
+        <div class="hero-buttons">
+          <a class="btn-primary" href="/">Join the Club</a>
+          <a class="btn-secondary" href="/">Find a Swap</a>
+        </div>
+      </div>
+    </div>
+    <div class="section-container">
+      <h2>Why clothing swaps?</h2>
+      <p>
+        Clothing swaps (Also called Closwaps) are a fun and sustainable way to
+        refresh your wardrobe without spending money. Bring your gently used
+        clothes and exchange them for new-to-you items!
       </p>
-      <div class="button-container">
-        <button class="button auto-margin">
-          <a href="/join">Join the Club</a>
-        </button>
-        <button class="button auto-margin">
-          <a href="/swaps">Find a swap</a>
-        </button>
+    </div>
+
+    <div class="how-it-works-section">
+      <div class="how-it-works-image">
+        <Picture
+          src={HowItWorksImage}
+          alt="People at a clothes swap event"
+          widths={[300, 600, 900]}
+          formats={["webp"]}
+          loading={"eager"}
+        />
+      </div>
+      <div class="how-it-works-content">
+        <h2>How It Works</h2>
+        <ol>
+          <li>Gather your gently used clothing.</li>
+          <li>Join us at the event.</li>
+          <li>Swap your items with others!</li>
+        </ol>
+        <p>
+          <a href="/prepare"
+            >Click to learn more about how to prepare for a clothing swap!</a
+          >
+        </p>
+      </div>
+    </div>
+    <div class="upcoming-swaps-section">
+      <div class="upcoming-swaps-text-column">
+        <h2>Upcoming Swaps</h2>
+        <div class="swap-cards-container">
+          <div class="swap-card">
+            <h3>Central City Swap</h3>
+            <p><strong>Date:</strong> Saturday, June 15, 2024</p>
+            <p><strong>Time:</strong> 10:00 AM - 2:00 PM</p>
+            <p><strong>Address:</strong> 123 Main St, Christchurch</p>
+          </div>
+          <div class="swap-card">
+            <h3>Coastal Community Swap</h3>
+            <p><strong>Date:</strong> Sunday, June 23, 2024</p>
+            <p><strong>Time:</strong> 11:00 AM - 3:00 PM</p>
+            <p><strong>Address:</strong> 456 Beach Rd, Sumner</p>
+          </div>
+        </div>
+      </div>
+      <div class="upcoming-swaps-image-column">
+        <Picture
+          src={UpcomingSwapsImage}
+          alt="People Browse clothes at a swap event"
+          widths={[300, 600, 900]}
+          formats={["webp"]}
+        />
       </div>
     </div>
   </div>
-  <div class="why">
-    <h2>Why clothing swaps?</h2>
-    <p class="why-p">
-      Clothing swaps (Also called Closwaps) are a fun and sustainable way to
-      refresh your wardrobe without spending money. Bring your gently used
-      clothes and exchange them for new-to-you items!
-    </p>
-  </div>
-
-  <style>
-    .hero-image {
-      object-fit: cover;
-      position: absolute;
-      z-index: -1;
-      top: 0;
-      left: 0;
-      width: 100%;
-      opacity: 8%;
-      margin: 0px;
-    }
-    .hero-text {
-      color: #040316;
-      font-size: clamp(3.5rem, 8vw, 10rem);
-      font-weight: 400;
-      max-width: 100vw;
-      text-align: center;
-    }
-    .hero-p {
-      font-size: clamp(1.3rem, 4vw, 2rem);
-      text-align: center;
-    }
-    .container {
-      width: 100vw;
-      position: relative;
-      margin: 0px;
-    }
-
-    .hero-text-container {
-      height: 400px;
-      display: flex;
-      flex-direction: column;
-      gap: 20px;
-      align-content: center;
-    }
-
-    .auto-margin {
-      margin: auto;
-    }
-
-    h2 {
-      font-size: clamp(2.625em, 6vw, 7.5em);
-      font-weight: 400;
-    }
-
-    .why {
-      padding-top: 80px;
-      padding-left: 64px;
-    }
-
-    .why-p {
-      padding-top: 1em;
-      font-size: clamp(0.87em, 5.3vw, 1.4em);
-      max-width: 1200px;
-    }
-
-    .button-container {
-      display: flex;
-      align-self: center;
-      gap: 20px;
-    }
-  </style>
 </Layout>
+<style>
+  .content {
+    display: flex;
+    justify-content: flex-start;
+    flex-direction: column; /* Allow sections to stack */
+  }
+
+  /* Hero Section Container */
+  .hero-container {
+    position: relative;
+    width: 100%;
+    margin: auto;
+    background-color: #ffffff; /* White background for the content area */
+    overflow: hidden; /* Ensures rounded corners clip content */
+    display: flex;
+    flex-direction: column; /* Stack content vertically by default */
+  }
+
+  /* Background Image & Overlay */
+  .hero-background {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: url("https://m-creates.com/hero.webp"); /* Placeholder image */
+    background-size: cover;
+    background-position: center;
+    opacity: 0.12; /* Slightly transparent */
+  }
+
+  /* Content Area */
+  .hero-content {
+    position: relative;
+    z-index: 10; /* Ensure content is above background */
+    padding: 2rem; /* Default padding */
+    text-align: center;
+    color: var(--text-color);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    min-height: 600px; /* Minimum height for visual balance */
+  }
+
+  /* Heading */
+  .hero-content h1 {
+    font-size: 3rem; /* Large heading */
+    font-weight: 500;
+    margin-bottom: 1rem;
+    line-height: 1.2;
+  }
+
+  /* Paragraph Text */
+  .hero-content p {
+    font-size: 1.125rem; /* Slightly larger paragraph */
+    margin-bottom: 2rem;
+    max-width: 640px; /* Constrain paragraph width for readability */
+  }
+
+  /* Buttons Container */
+  .hero-buttons {
+    display: flex;
+    flex-direction: column; /* Buttons stack on small screens */
+    gap: 1rem; /* Space between buttons */
+    margin-top: 1rem;
+  }
+
+  /* Common Button Styles */
+  .hero-buttons a {
+    padding: 0.8rem 2rem; /* Vertical and horizontal padding */
+    border-radius: 10px; /* Fully rounded pills */
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.3s ease; /* Smooth transitions for hover effects */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+    text-decoration: none; /* Remove underline for links treated as buttons */
+    display: inline-block; /* Allows padding and alignment */
+    text-align: center;
+    font-size: 16px;
+  }
+
+  .section-container {
+    width: 100%;
+    background-color: #ffffff;
+    border-radius: 12px;
+    box-shadow: 0 10px 15px rgba(0, 0, 0, 0.05);
+    padding: 2rem; /* Provides internal spacing around content */
+    text-align: left; /* This is correct for left alignment */
+    color: var(
+      --text-color
+    ); /* Ensures text is black as per your --text-color variable */
+  }
+
+  .section-container h2 {
+    font-size: 3rem;
+    font-weight: 500; /* Bold */
+    margin-bottom: 1rem;
+    color: var(--text-color); /* Ensures heading is black */
+  }
+
+  .section-container p {
+    font-size: 1.125rem;
+    line-height: 1.6;
+    max-width: 700px; /* Constrains paragraph width for readability */
+    margin-left: 0; /* Explicitly set left margin if max-width is used */
+    margin-right: 0;
+  }
+  /* How it works section */
+  .how-it-works-section {
+    width: 100%;
+    max-height: 900px;
+    background-color: #f9f7f3; /* Light creamy background from screenshot */
+    border-radius: 12px; /* Consistent rounded corners */
+    box-shadow: 0 10px 15px rgba(0, 0, 0, 0.05); /* Subtle shadow */
+    padding: 2rem; /* Overall padding inside the section */
+    display: flex;
+    flex-direction: column; /* Stack image and text on small screens */
+    align-items: center; /* Horizontally centers content when stacked */
+    gap: 2rem; /* Space between image and text when stacked */
+  }
+
+  .how-it-works-image {
+    max-height: 700px;
+    width: 100%; /* Full width on small screens */
+    border-radius: 8px; /* Slightly less rounded corners for image itself */
+    overflow: hidden; /* Ensures image respects border-radius */
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1); /* Subtle shadow for the image box */
+  }
+
+  .how-it-works-image picture,
+  .how-it-works-image img {
+    width: 100%;
+    height: auto;
+    display: block;
+    object-fit: cover; /* Ensures image covers its container without stretching */
+  }
+
+  .how-it-works-content {
+    flex-grow: 1; /* Allows text content to take remaining space */
+    width: 100%; /* Full width on small screens */
+    text-align: left;
+    color: var(--text-color);
+  }
+
+  .how-it-works-content h2 {
+    font-size: 3rem; /* Matches screenshot size */
+    font-weight: 500;
+    margin-bottom: 1.5rem;
+    color: var(--text-color); /* Black color */
+  }
+
+  .how-it-works-content ol {
+    list-style-type: decimal; /* Ensures numbered list */
+    list-style-position: outside; /* Numbers outside the list item box */
+    margin-left: 1.25rem; /* Indent the list */
+    margin-bottom: 1.5rem;
+    color: var(--text-color);
+  }
+
+  .how-it-works-content li {
+    font-size: 1.125rem;
+    line-height: 1.8;
+    margin-bottom: 0.5rem; /* Space between list items */
+    color: var(--text-color);
+  }
+
+  .how-it-works-content li:last-child {
+    margin-bottom: 0;
+  }
+
+  .how-it-works-content p {
+    font-size: 1rem;
+    line-height: 1.6;
+  }
+
+  .how-it-works-content p a {
+    color: var(--text-color); /* Black link color as in screenshot */
+    text-decoration: underline;
+    font-weight: 400;
+  }
+
+  .how-it-works-content p a:hover {
+    text-decoration: none;
+    color: var(--accent-color); /* Hover accent */
+  }
+
+  .upcoming-swaps-section {
+    width: 100%;
+    background-color: #ffffff; /* White background for the section box */
+    box-shadow: 0 10px 15px rgba(0, 0, 0, 0.05);
+    padding: 2rem;
+    display: flex;
+    flex-direction: column; /* Stack columns on small screens */
+    gap: 2rem; /* Space between text and image columns */
+    align-items: center; /* Center horizontally when stacked */
+  }
+
+  .upcoming-swaps-text-column {
+    flex-grow: 1; /* Allow text column to take available space */
+    width: 100%; /* Full width on small screens */
+    text-align: left;
+    color: var(--text-color);
+  }
+
+  .upcoming-swaps-text-column h2 {
+    font-size: 3rem; /* Consistent heading size */
+    font-weight: 500;
+    margin-bottom: 1.5rem;
+    color: var(--text-color);
+  }
+
+  .swap-cards-container {
+    display: flex;
+    flex-direction: column; /* Stack swap cards vertically */
+    gap: 1.5rem; /* Space between individual swap cards */
+  }
+
+  .swap-card {
+    background-color: #f9f9f9; /* Slightly off-white for cards */
+    border-radius: 8px;
+    padding: 1.25rem;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05); /* Subtle shadow for individual cards */
+    border: 1px solid #eeeeee; /* Light border */
+    color: var(--text-color);
+  }
+
+  .swap-card h3 {
+    font-size: 1.5rem;
+    font-weight: 600;
+    margin-bottom: 0.75rem;
+    color: var(--accent-color); /* Use accent color for swap names */
+  }
+
+  .swap-card p {
+    font-size: 1rem;
+    line-height: 1.5;
+    margin-bottom: 0.5rem;
+  }
+
+  .swap-card p:last-child {
+    margin-bottom: 0;
+  }
+
+  .upcoming-swaps-image-column {
+    border-radius: 30px;
+    overflow: hidden;
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+    height: 100%;
+  }
+
+  .upcoming-swaps-image-column picture,
+  .upcoming-swaps-image-column img {
+    width: 100%;
+    display: block;
+    object-fit: cover;
+  }
+
+  /* Responsive Adjustments */
+  @media (min-width: 768px) {
+    /* For medium screens and up */
+    .hero-content {
+      padding: 3rem; /* More padding on larger screens */
+    }
+
+    .hero-content h1 {
+      font-size: 4rem; /* Larger heading */
+    }
+
+    .hero-content p {
+      font-size: 1.25rem; /* Larger paragraph */
+    }
+
+    .hero-buttons {
+      flex-direction: row; /* Buttons side-by-side on larger screens */
+      gap: 1.5rem; /* More space between buttons */
+    }
+
+    .section-container {
+      padding: 5rem;
+    }
+
+    .section-container h2 {
+      font-size: 3rem;
+    }
+
+    .section-container p {
+      font-size: 1.25rem;
+    }
+
+    .how-it-works-section {
+      flex-direction: row; /* Side-by-side on larger screens */
+      justify-content: space-between; /* Distributes space between image and text */
+      align-items: center; /* Aligns items to the top within their row */
+      padding: 4rem;
+    }
+
+    .how-it-works-image {
+      width: 45%; /* Image takes roughly 45% width on desktop */
+    }
+
+    .how-it-works-content {
+      width: 50%; /* Text takes roughly 50% width on desktop */
+      margin-left: 50px;
+    }
+
+    .upcoming-swaps-section {
+      flex-direction: row; /* Side-by-side on larger screens */
+      justify-content: space-between;
+      align-items: flex-start; /* Align content to the top of each column */
+      padding: 4rem;
+    }
+
+    .upcoming-swaps-text-column {
+      width: 60%; /* Text column takes 60% on desktop */
+    }
+    .upcoming-swaps-image-column {
+      width: 45%; /* Image column takes 35% on desktop (leaving space for gap) */
+    }
+  }
+</style>

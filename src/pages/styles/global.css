@@ -3,8 +3,9 @@
 }
 
 body {
-  font-family: Inter, -apple-system, sans-serif;
-  background-color: rgb(255, 254, 254);
+  font-family: "Inter", sans-serif; /* A modern, clean sans-serif font */
+  background-color: #f3f4f6; /* Light gray background */
+  min-height: 100vh; /* Full viewport height */
 }
 
 button {
@@ -25,6 +26,26 @@ button a {
 h1 {
   font-size: 5rem;
 }
+
+.btn-secondary:hover {
+  transform: scale(1.05); /* Slightly enlarge on hover */
+}
+
+.btn-secondary {
+  background-color: #f0e2cc; /* Transparent background */
+  color: var(--text-color);
+}
+
+.btn-primary:hover {
+  transform: scale(1.025); /* Slightly enlarge on hover */
+}
+
+.btn-primary {
+  background-color: #f4bd54; /* Yelorange background */
+  color: var(--text-color); /* Black text */
+  border: 2px solid transparent; /* No border initially */
+}
+
 /* Navigation styles */
 :root {
   --color-1: #ffffff;
