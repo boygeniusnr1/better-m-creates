@@ -4,6 +4,7 @@ const pageTitle = "Home - Clothes Swap Club";
 import { Picture } from "astro:assets";
 import HowItWorksImage from "../assets/how-it-works.webp";
 import UpcomingSwapsImage from "../assets/upcoming-swaps.webp";
+import Card from "../components/Card.astro";
 ---
 
 <Layout pageTitle={pageTitle}>
@@ -59,18 +60,10 @@ import UpcomingSwapsImage from "../assets/upcoming-swaps.webp";
       <div class="upcoming-swaps-text-column">
         <h2>Upcoming Swaps</h2>
         <div class="swap-cards-container">
-          <div class="swap-card">
-            <h3>Central City Swap</h3>
-            <p><strong>Date:</strong> Saturday, June 15, 2024</p>
-            <p><strong>Time:</strong> 10:00 AM - 2:00 PM</p>
-            <p><strong>Address:</strong> 123 Main St, Christchurch</p>
-          </div>
-          <div class="swap-card">
-            <h3>Coastal Community Swap</h3>
-            <p><strong>Date:</strong> Sunday, June 23, 2024</p>
-            <p><strong>Time:</strong> 11:00 AM - 3:00 PM</p>
-            <p><strong>Address:</strong> 456 Beach Rd, Sumner</p>
-          </div>
+          <h3>No upcoming swaps at the moment.</h3>
+          <p>Check back later for new events!</p>
+          <!-- Example swap cards, replace with dynamic content -->
+          <!-- <Card title="Swap Event 1" date="March 15, 2024" time="2:00 PM - 5:00 PM" address="123 Swap St, City" /> -->
         </div>
       </div>
       <div class="upcoming-swaps-image-column">
@@ -303,11 +296,9 @@ import UpcomingSwapsImage from "../assets/upcoming-swaps.webp";
   }
 
   .swap-card {
-    background-color: #f9f9f9; /* Slightly off-white for cards */
+    background-color: #fff7eb; /* Slightly off-white for cards */
     border-radius: 8px;
     padding: 1.25rem;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05); /* Subtle shadow for individual cards */
-    border: 1px solid #eeeeee; /* Light border */
     color: var(--text-color);
   }
 

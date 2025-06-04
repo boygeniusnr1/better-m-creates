@@ -1,0 +1,162 @@
+---
+// src/pages/prepare.astro
+import Layout from "../layouts/Layout.astro";
+const pageTitle = "Prepare - Clothes Swap Club";
+---
+
+<Layout pageTitle={pageTitle}>
+  <div class="content prepare-page-content">
+    <h1>Prepare</h1>
+    <h2 class="subtitle">Coming to a Closwap? Start here.</h2>
+
+    <div class="info-section">
+      <h2>What to bring</h2>
+      <p>
+        Bring your gently used, neatly folded clothing, shoes, and accessories.
+        Please ensure that all items are clean and in good condition. Bring a
+        maximum of 10 items to swap.
+      </p>
+    </div>
+
+    <div class="info-section">
+      <h2>What not to bring</h2>
+      <p>
+        Please don't bring items that are heavily worn, damaged, or stained.
+        Only bring what you would like to receive. Please don't bring any
+        underwear. If your clothes are ripped or torn, you may be able to get
+        them fixed at the <a
+          href="https://www.textileresq.com/"
+          target="_blank"
+          rel="noopener noreferrer">Textile ResQ</a
+        >
+      </p>
+    </div>
+
+    <div class="info-section highlight-section">
+      <p>
+        Please make sure all the clothes you bring are clean. For any stubborn
+        stains, see the <a href="/clothingswaps/tips">tips.</a>
+      </p>
+    </div>
+  </div>
+</Layout>
+
+<style>
+  /* Base styles for the content container on the prepare page */
+  .prepare-page-content {
+    padding: 2rem 1.5rem; /* Consistent horizontal padding for all screens */
+    display: flex;
+    flex-direction: column;
+    gap: 2.5rem; /* Space between main sections like h1/h2 and info-sections */
+    color: var(--text-color); /* Ensure text color is consistent */
+  }
+
+  /* Main heading for the page */
+  .prepare-page-content h1 {
+    font-size: 4rem;
+    font-weight: 500;
+    margin-bottom: 0.5rem; /* Closer to the subtitle */
+    color: var(--text-color);
+  }
+
+  /* Subtitle below the main heading */
+  .prepare-page-content h2.subtitle {
+    font-size: 1.8rem; /* Adjusted for better visual hierarchy */
+    font-weight: 400;
+    margin-top: 0; /* Remove default top margin */
+    margin-bottom: 2rem; /* Space before the first info section */
+    color: var(--text-color);
+  }
+
+  /* Styling for individual info sections (What to bring, What not to bring) */
+  .info-section {
+    background-color: #fff7eb; /* White background for card effect */
+    border-radius: 12px;
+    padding: 2rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem; /* Space between h2 and p within the section */
+  }
+
+  .info-section h2 {
+    font-size: 2rem; /* Heading for each info section */
+    font-weight: 600;
+    color: var(--accent-color); /* Use accent color for these headings */
+    margin-top: 0;
+    margin-bottom: 0;
+  }
+
+  .info-section p {
+    font-size: 1.125rem; /* Paragraph text size */
+    line-height: 1.6;
+    margin-top: 0;
+    margin-bottom: 0;
+  }
+
+  .info-section p a {
+    color: #0000ee; /* Standard blue link color */
+    text-decoration: underline;
+    transition: color 0.3s ease;
+  }
+
+  .info-section p a:hover {
+    color: var(--accent-color);
+  }
+
+  /* Specific styling for the "highlight" section (Please make sure all clothes...) */
+  .highlight-section {
+    background-color: #87bd74; /* A light, warm background for emphasis */
+    border: 1px solid #e0c8a0; /* A slightly darker border */
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.08); /* Slightly more prominent shadow */
+    padding: 2.2rem; /* Slightly more padding */
+  }
+
+  .highlight-section p {
+    font-weight: 500; /* Make text slightly bolder */
+    text-align: center; /* Center the text in this highlight box */
+  }
+
+  .highlight-section p a {
+    color: var(--text-color); /* Keep link color consistent with main text */
+    font-weight: 700; /* Make link text bolder */
+  }
+
+  /* Responsive Adjustments */
+  @media (max-width: 767px) {
+    .prepare-page-content {
+      padding: 1.5rem 1rem; /* Less padding on very small screens */
+      margin: 2rem auto; /* Less vertical margin */
+      gap: 1.5rem; /* Smaller gap between sections */
+    }
+    .prepare-page-content h1 {
+      font-size: 3rem; /* Smaller main heading on mobile */
+    }
+    .prepare-page-content h2.subtitle {
+      font-size: 1.4rem; /* Smaller subtitle on mobile */
+    }
+    .info-section {
+      padding: 1.5rem; /* Smaller padding inside info sections */
+    }
+    .info-section h2 {
+      font-size: 1.5rem;
+    }
+    .info-section p {
+      font-size: 1rem;
+    }
+    .highlight-section {
+      padding: 1.8rem;
+    }
+  }
+
+  @media (min-width: 768px) {
+    .prepare-page-content {
+      padding: 4rem 2rem; /* More padding on larger screens */
+    }
+    .prepare-page-content h1 {
+      font-size: 6rem; /* Larger main heading */
+    }
+    .prepare-page-content h2.subtitle {
+      font-size: 2.5rem; /* Larger subtitle */
+    }
+  }
+</style>

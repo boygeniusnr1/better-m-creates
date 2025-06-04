@@ -1,0 +1,147 @@
+---
+// src/pages/contact.astro
+import Layout from "../layouts/Layout.astro";
+const pageTitle = "Contact Us - Clothes Swap Club";
+---
+
+<Layout pageTitle={pageTitle}>
+  <style is:global>
+    body {
+      background-color: #f9f7f3; /* Light creamy background for the entire page */
+    }
+    main#main-content {
+      padding-top: 0;
+      padding-bottom: 0;
+    }
+  </style>
+
+  <div class="contact-page-container">
+    <div class="contact-header">
+      <h1>Contact us</h1>
+    </div>
+
+    <div class="contact-email-section">
+      <h2>E-mail</h2>
+      <p><a href="mailto:max@m-creates.com">max@m-creates.com</a></p>
+    </div>
+
+    <section class="volunteer-section">
+      <h2>Want to Volunteer?</h2>
+      <p>Please visit the <a href="/volunteer">Volunteer page here.</a></p>
+    </section>
+  </div>
+</Layout>
+
+<style>
+  /* Overall container for the contact page content to control horizontal padding and centering */
+  .contact-page-container {
+    /* max-width is removed as per your request */
+    margin: 4rem auto; /* Top/bottom margin and horizontal centering */
+    padding: 0 1.5rem; /* Default horizontal padding for all screen sizes */
+    display: flex;
+    flex-direction: column;
+    gap: 3rem; /* Space between the main content blocks */
+  }
+
+  /* Section for the main "Contact us" heading */
+  .contact-header {
+    text-align: left; /* Align heading to the left */
+    color: var(--text-color); /* Use your defined text color */
+  }
+
+  .contact-header h1 {
+    font-size: 4.5rem; /* Large size as seen in the screenshot */
+    font-weight: 500;
+    margin: 0; /* Remove default margins to control spacing precisely */
+    line-height: 1.1; /* Adjust line height for better visual spacing */
+  }
+
+  /* Section for the email information */
+  .contact-email-section {
+    text-align: left; /* Align content to the left */
+    color: var(--text-color);
+    margin-top: -1.5rem; /* Pull up closer to h1 as per screenshot */
+  }
+
+  .contact-email-section h2 {
+    font-size: 2.5rem; /* Matches "E-mail" heading size in screenshot */
+    font-weight: 500;
+    margin-bottom: 0.5rem; /* Space between heading and email link */
+    margin-top: 0; /* Remove default top margin */
+  }
+
+  .contact-email-section p a {
+    font-size: 1.125rem; /* Size of the email link text */
+    color: #0000ee; /* Standard blue link color from screenshot */
+    text-decoration: underline;
+    transition: color 0.3s ease;
+  }
+
+  .contact-email-section p a:hover {
+    color: var(--accent-color); /* Your site's accent color on hover */
+  }
+
+  /* Volunteer Section (the distinct green box) */
+  .volunteer-section {
+    width: 100%;
+    background-color: #87bd74; /* Green background color from the screenshot */
+    border-radius: 12px;
+    padding: 3rem 2rem; /* Ample internal padding */
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Center content horizontally */
+    text-align: center;
+    color: #ffffff; /* White text color for contrast */
+    box-shadow: 0 10px 15px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+  }
+
+  .volunteer-section h2 {
+    font-size: 2.8rem; /* Large heading size from screenshot */
+    font-weight: 700;
+    margin-bottom: 0.5rem; /* Closer spacing to paragraph as in screenshot */
+    line-height: 1.2;
+    margin-top: 0; /* Remove default top margin */
+  }
+
+  .volunteer-section p {
+    font-size: 1.2rem; /* Paragraph text size */
+    line-height: 1.5;
+    margin: 0; /* Remove default margins */
+  }
+
+  .volunteer-section p a {
+    color: #ffffff; /* White link color */
+    text-decoration: underline;
+    font-weight: 500;
+  }
+
+  .volunteer-section p a:hover {
+    color: rgba(255, 255, 255, 0.8); /* Slightly faded white on hover */
+  }
+
+  /* Responsive Adjustments */
+  @media (max-width: 767px) {
+    .contact-page-container {
+      margin: 2rem auto;
+    }
+    .contact-header h1 {
+      font-size: 3.5rem;
+    }
+    .contact-email-section h2 {
+      font-size: 2rem;
+    }
+    .volunteer-section h2 {
+      font-size: 2.2rem;
+    }
+    .volunteer-section p {
+      font-size: 1rem;
+    }
+  }
+
+  /* For larger screens (768px and up), increase horizontal padding for better readability */
+  @media (min-width: 768px) {
+    .contact-page-container {
+      padding: 0 4rem; /* Increased horizontal padding on desktop */
+    }
+  }
+</style>

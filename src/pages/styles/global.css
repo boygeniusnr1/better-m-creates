@@ -110,7 +110,7 @@ nav svg {
     position: fixed;
     top: 0;
     right: -100%;
-    z-index: 10;
+    z-index: 9999;
     width: 300px;
 
     background-color: var(--color-1);
