@@ -1,9 +1,161 @@
 ---
+// src/pages/swaps.astro
 import Layout from "../layouts/Layout.astro";
-const pageTitle = "Find Swaps - Clothes Swap Club";
+import Card from "../components/Card.astro"; // Import the new SwapCard component
+
+const pageTitle = "Swaps - Clothes Swap Club";
 ---
 
 <Layout pageTitle={pageTitle}>
-  <h1>Swaps</h1>
-  <p>Work in progress</p>
+  <div class="content swaps-page-content">
+    <h1>Upcoming Swaps</h1>
+    <p class="intro-paragraph">
+      Join us at one of our upcoming clothing swap events! It's a fantastic
+      opportunity to refresh your wardrobe sustainably and connect with your
+      community.
+    </p>
+
+    <div class="swap-cards-grid">
+      <div class="noswaps">
+        <!--Add <Card /> components here for each swap event-->
+        <h2>No upcoming swaps at the moment.</h2>
+        <p>Check back later for new Events!</p>
+      </div>
+    </div>
+
+    <div class="call-to-action-section">
+      <h2>Want to Host a Swap?</h2>
+      <p>
+        If you're interested in organizing a swap in your neighborhood or at
+        your organization, we'd love to help!
+      </p>
+      <p>
+        <a href="/contact">Contact us to learn more.</a>
+      </p>
+    </div>
+  </div>
 </Layout>
+
+<style>
+  /* Base styles for the content container on the swaps page */
+  .swaps-page-content {
+    padding: 2.5rem 1.5rem; /* Consistent horizontal padding for all screens */
+    margin: 4rem auto; /* Top/bottom margin and horizontal centering */
+    display: flex;
+    flex-direction: column;
+    gap: 2.5rem; /* Space between main sections like h1/p and the grid */
+    color: var(--text-color); /* Ensure text color is consistent */
+    background-color: #ffffff; /* White background for the content block */
+    border-radius: 12px;
+    box-shadow: 0 10px 15px rgba(0, 0, 0, 0.05); /* Subtle shadow */
+  }
+
+  /* Main heading for the page */
+  .swaps-page-content h1 {
+    font-size: 3.5rem; /* Consistent with other main headings */
+    font-weight: 700;
+    margin-bottom: 0.5rem; /* Closer to the intro paragraph */
+    color: var(--text-color);
+  }
+
+  /* Introductory paragraph */
+  .swaps-page-content .intro-paragraph {
+    font-size: 1.125rem;
+    line-height: 1.6;
+    margin-bottom: 1.5rem; /* Space before the grid */
+  }
+
+  /* Grid container for the swap cards */
+  .swap-cards-grid {
+    display: grid;
+    grid-template-columns: 1fr; /* Single column on small screens */
+    gap: 1.5rem; /* Space between cards */
+  }
+
+  /* Responsive adjustments for grid columns */
+  @media (min-width: 640px) {
+    /* Tablets and small desktops */
+    .swap-cards-grid {
+      grid-template-columns: repeat(2, 1fr); /* Two columns */
+    }
+  }
+
+  @media (min-width: 1024px) {
+    /* Larger desktops */
+    .swap-cards-grid {
+      grid-template-columns: repeat(3, 1fr); /* Three columns */
+    }
+  }
+
+  /* Call to action section at the bottom */
+  .call-to-action-section {
+    background-color: #fff7eb; /* A light, warm background for emphasis */
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.08); /* Slightly more prominent shadow */
+    padding: 2rem;
+    border-radius: 12px;
+    text-align: center;
+    margin-top: 1.5rem; /* Space from the grid */
+  }
+
+  .call-to-action-section h2 {
+    font-size: 2rem;
+    font-weight: 600;
+    color: var(--text-color);
+    margin-bottom: 0.75rem;
+  }
+
+  .call-to-action-section p {
+    font-size: 1.125rem;
+    line-height: 1.6;
+    margin-bottom: 0.5rem;
+  }
+
+  .call-to-action-section p a {
+    color: var(--text-color);
+    text-decoration: underline;
+    font-weight: 600;
+  }
+
+  .call-to-action-section p a:hover {
+    color: var(--accent-color);
+  }
+
+  .noswaps {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  /* General Responsive Adjustments */
+  @media (max-width: 767px) {
+    .swaps-page-content {
+      padding: 1.5rem 1rem;
+      margin: 2rem auto;
+      gap: 1.5rem;
+    }
+    .swaps-page-content h1 {
+      font-size: 2.5rem;
+    }
+    .intro-paragraph {
+      font-size: 1rem;
+    }
+    .call-to-action-section {
+      padding: 1.5rem;
+    }
+    .call-to-action-section h2 {
+      font-size: 1.5rem;
+    }
+    .call-to-action-section p {
+      font-size: 1rem;
+    }
+  }
+
+  @media (min-width: 768px) {
+    .swaps-page-content {
+      padding: 4rem 3rem;
+    }
+    .swaps-page-content h1 {
+      font-size: 4.5rem;
+    }
+  }
+</style>
