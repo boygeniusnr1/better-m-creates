@@ -1,0 +1,132 @@
+---
+// src/pages/tips.astro
+import Layout from "../layouts/Layout.astro";
+const pageTitle = "Tips - Clothes Swap Club";
+---
+
+<Layout pageTitle={pageTitle}>
+  <div class="content tips-page-content">
+    <h1>Tips for cleaning clothes</h1>
+    <p class="intro-paragraph">
+      Here are some tips for cleaning clothes with stubborn stains before a
+      clothing swap:
+    </p>
+    <ul>
+      <li class="note-tip">
+        NOTE: Try these on a non-visible area of the fabric to ensure there's no
+        discolouration.
+      </li>
+      <li>
+        First, try applying some lemon juice and putting it out in the sun
+      </li>
+      <li>On white fabrics, try some bleach</li>
+      <li>Try some hydrogen peroxide on the stain</li>
+      <li>
+        Add some vinegar onto the stain, then rub on a bit of baking soda.
+      </li>
+    </ul>
+    <p class="outro-paragraph">
+      Following these tips will help ensure that your clothes are clean and
+      ready for swapping!
+    </p>
+  </div>
+</Layout>
+
+<style>
+  /* Base styles for the content container on the tips page */
+  .tips-page-content {
+    padding: 2.5rem 1.5rem; /* Consistent horizontal padding for all screens */
+    margin: 4rem auto; /* Top/bottom margin and horizontal centering */
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem; /* Space between main elements */
+    color: var(--text-color); /* Ensure text color is consistent */
+    background-color: #ffffff; /* White background for the content block */
+    border-radius: 12px;
+    box-shadow: 0 10px 15px rgba(0, 0, 0, 0.05); /* Subtle shadow */
+  }
+
+  /* Main heading for the page */
+  .tips-page-content h1 {
+    font-size: 3.5rem; /* Adjusted for a tips page, slightly smaller than hero h1 */
+    font-weight: 700;
+    margin-bottom: 0.5rem; /* Space below heading */
+    color: var(--text-color);
+  }
+
+  /* Introductory paragraph */
+  .tips-page-content .intro-paragraph {
+    font-size: 1.125rem;
+    line-height: 1.6;
+    margin-bottom: 1rem; /* Space before the list */
+  }
+
+  /* Unordered list styling */
+  .tips-page-content ul {
+    list-style-type: disc; /* Standard bullet points */
+    margin-left: 1.5rem; /* Indent the list */
+    padding-left: 0;
+    margin-bottom: 1.5rem; /* Space after the list */
+  }
+
+  .tips-page-content li {
+    font-size: 1.125rem;
+    line-height: 1.8; /* More space between list items */
+    margin-bottom: 0.5rem; /* Space between list items */
+  }
+
+  .tips-page-content li:last-child {
+    margin-bottom: 0; /* No bottom margin on the last list item */
+  }
+
+  /* Special styling for the NOTE tip */
+  .tips-page-content li.note-tip {
+    font-weight: 600; /* Make it bolder */
+    color: var(--accent-color); /* A distinct color for a warning/note */
+    background-color: #fff7eb; /* Light yellow background */
+    padding: 0.75rem 1rem;
+    border-radius: 8px;
+    border: 1px solid #ffe0b2; /* Light orange border */
+    margin-bottom: 1.5rem; /* More space below the note */
+    list-style: none; /* Remove bullet point for the note */
+    margin-left: -1.5rem; /* Pull it back to align with the main content */
+  }
+
+  /* Outro paragraph */
+  .tips-page-content .outro-paragraph {
+    font-size: 1.125rem;
+    line-height: 1.6;
+    font-weight: 500; /* Slightly bolder for emphasis */
+    margin-top: 1rem; /* Space above this paragraph */
+  }
+
+  /* Responsive Adjustments */
+  @media (max-width: 767px) {
+    .tips-page-content {
+      padding: 1.5rem 1rem;
+      margin: 2rem auto;
+      gap: 1rem;
+    }
+    .tips-page-content h1 {
+      font-size: 2.5rem;
+    }
+    .tips-page-content .intro-paragraph,
+    .tips-page-content ul li,
+    .tips-page-content .outro-paragraph {
+      font-size: 1rem;
+    }
+    .tips-page-content li.note-tip {
+      padding: 0.5rem 0.8rem;
+      margin-bottom: 1rem;
+    }
+  }
+
+  @media (min-width: 768px) {
+    .tips-page-content {
+      padding: 4rem 3rem; /* More padding on larger screens */
+    }
+    .tips-page-content h1 {
+      font-size: 4.5rem;
+    }
+  }
+</style>

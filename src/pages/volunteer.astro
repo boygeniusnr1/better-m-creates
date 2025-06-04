@@ -1,9 +1,216 @@
 ---
+// src/pages/volunteer.astro
 import Layout from "../layouts/Layout.astro";
 const pageTitle = "Volunteer - Clothes Swap Club";
 ---
 
 <Layout pageTitle={pageTitle}>
-  <h1>Volunteer</h1>
-  <p>Work in progress</p>
+  <div class="content volunteer-page-content">
+    <h1>Volunteer with Us!</h1>
+    <p class="intro-paragraph">
+      Passionate about sustainability and community? Join our incredible team of
+      volunteers and help make clothes swapping events a huge success in your
+      area!
+    </p>
+
+    <div class="volunteer-section-card">
+      <h2>Why Volunteer?</h2>
+      <ul>
+        <li>
+          <strong>Make a Difference:</strong> Contribute directly to sustainable
+          fashion and reduce textile waste.
+        </li>
+        <li>
+          <strong>Community Connection:</strong> Meet like-minded individuals and
+          build local connections.
+        </li>
+        <li>
+          <strong>Gain Experience:</strong> Develop event management, organizational,
+          and communication skills.
+        </li>
+      </ul>
+    </div>
+
+    <div class="volunteer-section-card">
+      <h2>Volunteer Roles</h2>
+      <p>
+        We have a variety of roles to suit different interests and availability:
+      </p>
+      <ul>
+        <li>
+          <strong>Event Setup & Teardown:</strong> Help with tables, racks, and decor
+          before and after swaps.
+        </li>
+        <li>
+          <strong>Check-in & Registration:</strong> Greet participants, explain guidelines,
+          and manage sign-ups.
+        </li>
+        <li>
+          <strong>Sorting & Organization:</strong> Help keep swap items tidy and
+          categorized during the event.
+        </li>
+      </ul>
+    </div>
+
+    <div class="volunteer-section-card call-to-action-card">
+      <h2>Ready to Get Involved?</h2>
+      <p>
+        If you're excited to contribute and be part of the Clothes Swap Club
+        family, we'd love to hear from you!
+      </p>
+      <p>
+        Please reach out to us via email: <a
+          href="mailto:volunteer@m-creates.com">volunteer@m-creates.com</a
+        >
+      </p>
+      <p class="small-text">
+        Let us know a little about yourself, your interests, in which part of
+        Nelson you're availible for, and any specific roles you might be
+        interested in.
+      </p>
+    </div>
+  </div>
 </Layout>
+
+<style>
+  /* Base styles for the content container on the volunteer page */
+  .volunteer-page-content {
+    padding: 2.5rem 1.5rem; /* Consistent horizontal padding for all screens */
+    margin: 4rem auto; /* Top/bottom margin and horizontal centering */
+    display: flex;
+    flex-direction: column;
+    gap: 2.5rem; /* Space between main sections like h1/p and info-sections */
+    color: var(--text-color); /* Ensure text color is consistent */
+    background-color: #ffffff; /* White background for the content block */
+    border-radius: 12px;
+    box-shadow: 0 10px 15px rgba(0, 0, 0, 0.05); /* Subtle shadow */
+  }
+
+  /* Main heading for the page */
+  .volunteer-page-content h1 {
+    font-size: 3.5rem; /* Consistent with other main headings */
+    font-weight: 700;
+    margin-bottom: 0.5rem; /* Closer to the intro paragraph */
+    color: var(--text-color);
+  }
+
+  /* Introductory paragraph */
+  .volunteer-page-content .intro-paragraph {
+    font-size: 1.125rem;
+    line-height: 1.6;
+    margin-bottom: 1.5rem; /* Space before the first card */
+  }
+
+  /* Styling for individual volunteer info sections (cards) */
+  .volunteer-section-card {
+    background-color: #f9f9f9; /* Slightly off-white for cards */
+    border-radius: 10px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.03); /* Lighter shadow for cards */
+    padding: 2rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem; /* Space between h2 and list/paragraph */
+  }
+
+  .volunteer-section-card h2 {
+    font-size: 2rem;
+    font-weight: 600;
+    color: var(--accent-color); /* Use accent color for these headings */
+    margin-top: 0;
+    margin-bottom: 0;
+  }
+
+  .volunteer-section-card p {
+    font-size: 1.125rem;
+    line-height: 1.6;
+    margin-top: 0;
+    margin-bottom: 0;
+  }
+
+  .volunteer-section-card ul {
+    list-style-type: disc; /* Standard bullet points */
+    margin-left: 1.5rem; /* Indent the list */
+    padding-left: 0;
+    margin-top: 0.5rem; /* Space from heading */
+  }
+
+  .volunteer-section-card li {
+    font-size: 1.125rem;
+    line-height: 1.8;
+    margin-bottom: 0.5rem;
+  }
+
+  .volunteer-section-card li:last-child {
+    margin-bottom: 0;
+  }
+
+  /* Styling for links within the cards */
+  .volunteer-section-card a {
+    color: #0000ee; /* Standard blue link color */
+    text-decoration: underline;
+    transition: color 0.3s ease;
+  }
+
+  .volunteer-section-card a:hover {
+    color: var(--accent-color);
+  }
+
+  /* Specific styling for the call to action card */
+  .call-to-action-card {
+    background-color: #f0e2cc; /* A light, warm background for emphasis */
+    border: 1px solid #e0c8a0; /* A slightly darker border */
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.08); /* Slightly more prominent shadow */
+    text-align: center; /* Center text in this card */
+  }
+
+  .call-to-action-card h2 {
+    color: var(
+      --text-color
+    ); /* Keep heading black for contrast on light background */
+  }
+
+  .call-to-action-card p {
+    max-width: 600px; /* Constrain paragraph width for readability */
+    margin: 0 auto; /* Center paragraph */
+  }
+
+  .call-to-action-card p.small-text {
+    font-size: 0.9rem;
+    opacity: 0.8;
+    margin-top: 1rem;
+  }
+
+  /* Responsive Adjustments */
+  @media (max-width: 767px) {
+    .volunteer-page-content {
+      padding: 1.5rem 1rem;
+      margin: 2rem auto;
+      gap: 1.5rem;
+    }
+    .volunteer-page-content h1 {
+      font-size: 2.5rem;
+    }
+    .intro-paragraph {
+      font-size: 1rem;
+    }
+    .volunteer-section-card {
+      padding: 1.5rem;
+    }
+    .volunteer-section-card h2 {
+      font-size: 1.5rem;
+    }
+    .volunteer-section-card p,
+    .volunteer-section-card li {
+      font-size: 1rem;
+    }
+  }
+
+  @media (min-width: 768px) {
+    .volunteer-page-content {
+      padding: 4rem 3rem;
+    }
+    .volunteer-page-content h1 {
+      font-size: 4.5rem;
+    }
+  }
+</style>
