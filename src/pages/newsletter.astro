@@ -1,0 +1,84 @@
+---
+// src/pages/newsletter.astro
+import Layout from "../layouts/Layout.astro";
+const pageTitle = "Newsletter - Clothes Swap Club";
+---
+
+<Layout pageTitle={pageTitle}>
+  <div class="content newsletter-page-content">
+    <h1>Newsletter coming soon...</h1>
+    <p class="intro-paragraph">
+      Another way to join the club is to <a href="/volunteer">Volunteer!</a>
+    </p>
+  </div>
+</Layout>
+
+<style>
+  /* Base styles for the content container on the newsletter page */
+  .newsletter-page-content {
+    padding: 2.5rem 1.5rem; /* Consistent horizontal padding for all screens */
+    margin: 6rem auto; /* More vertical margin to center content on a sparse page */
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Center content horizontally */
+    text-align: center; /* Center text within its container */
+    gap: 1.5rem; /* Space between heading and paragraph */
+    color: var(--text-color); /* Ensure text color is consistent */
+    background-color: #ffffff; /* White background for the content block */
+    border-radius: 12px;
+    box-shadow: 0 10px 15px rgba(0, 0, 0, 0.05); /* Subtle shadow */
+    width: 100%; /* Take full width within its parent */
+    max-width: 700px; /* Limit width for readability, even without max-width on global containers */
+  }
+
+  /* Main heading for the page */
+  .newsletter-page-content h1 {
+    font-size: 3.5rem; /* Consistent with other main headings */
+    font-weight: 700;
+    margin-bottom: 0.5rem; /* Closer to the intro paragraph */
+    color: var(--text-color);
+  }
+
+  /* Introductory paragraph */
+  .newsletter-page-content .intro-paragraph {
+    font-size: 1.125rem;
+    line-height: 1.6;
+    margin-bottom: 0;
+  }
+
+  /* Styling for links within the paragraph */
+  .newsletter-page-content .intro-paragraph a {
+    color: var(--accent-color); /* Use accent color for the link */
+    text-decoration: underline;
+    font-weight: 600;
+    transition: color 0.3s ease;
+  }
+
+  .newsletter-page-content .intro-paragraph a:hover {
+    color: #e07b39; /* A slightly different shade on hover if accent is yellow */
+  }
+
+  /* Responsive Adjustments */
+  @media (max-width: 767px) {
+    .newsletter-page-content {
+      padding: 1.5rem 1rem;
+      margin: 4rem auto;
+      gap: 1rem;
+    }
+    .newsletter-page-content h1 {
+      font-size: 2.5rem;
+    }
+    .newsletter-page-content .intro-paragraph {
+      font-size: 1rem;
+    }
+  }
+
+  @media (min-width: 768px) {
+    .newsletter-page-content {
+      padding: 4rem 3rem;
+    }
+    .newsletter-page-content h1 {
+      font-size: 4.5rem;
+    }
+  }
+</style>
