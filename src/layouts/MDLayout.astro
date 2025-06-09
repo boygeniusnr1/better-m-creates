@@ -1,7 +1,6 @@
 ---
 import Header from "../components/Header.astro";
 import Footer from "../components/Footer.astro";
-import "../pages/styles/global.css";
 import "../pages/styles/navbar.css";
 
 import { GoogleFontsOptimizer } from "astro-google-fonts-optimizer";
@@ -31,7 +30,32 @@ const { pageTitle } = Astro.props;
     <Header />
     <main id="main-content">
       <slot />
-      <Footer />
     </main>
+    <Footer />
   </body>
 </html>
+<style>
+  * {
+    font-family: Inter, sans-serif;
+  }
+  main {
+    margin: 1rem;
+    max-width: 800px;
+  }
+  main * {
+    margin-bottom: 1rem;
+  }
+
+  html {
+    background-color: #f3f4f6; /* Light gray background for the main content */
+  }
+  html,
+  body {
+    overflow-x: hidden;
+  }
+  main,
+  footer {
+    margin: 1rem auto;
+    padding: 1rem;
+  }
+</style>
