@@ -1,0 +1,120 @@
+---
+// src/pages/volunteer-signup-form.astro
+import Layout from "../layouts/Layout.astro";
+const pageTitle = "Volunteer Sign-Up - Clothes Swap Society";
+---
+
+<Layout pageTitle={pageTitle}>
+  <div class="content volunteer-form-page-content">
+    <h1>Volunteer Sign-Up Form</h1>
+    <p class="intro-paragraph">
+      Thank you for your interest in volunteering with the Clothes Swap Society!
+      Please fill out the form below to help us understand your availability and
+      interests.
+    </p>
+
+    <div class="google-form-embed-container">
+      <!--
+        IMPORTANT: Replace the content below with the actual embed code
+        you get from your Google Form (from Part 1, Step 6).
+        It will start with <iframe src="..."> and end with </iframe>.
+      -->
+      <iframe
+        src="https://docs.google.com/forms/d/e/1FAIpQLScAyhi2khL26RTdbbmi9JatBv9QkU6VxvKIULA20Hp3GH_7sg/viewform?embedded=true"
+        width="640"
+        height="1843">Loading…</iframe
+      >
+
+      <!-- End of Google Form Embed Placeholder -->
+    </div>
+  </div>
+</Layout>
+
+<style>
+  /* Base styles for the content container on the volunteer form page */
+  .volunteer-form-page-content {
+    padding: 2.5rem 1.5rem; /* Consistent horizontal padding for all screens */
+    margin: 4rem auto; /* Top/bottom margin and horizontal centering */
+    display: flex;
+    flex-direction: column;
+    gap: 2rem; /* Space between main elements */
+    color: var(--text-color); /* Ensure text color is consistent */
+    background-color: #ffffff; /* White background for the content block */
+    border-radius: 12px;
+    box-shadow: 0 10px 15px rgba(0, 0, 0, 0.05); /* Subtle shadow */
+    width: 100%; /* Take full width within its parent */
+  }
+
+  /* Main heading for the page */
+  .volunteer-form-page-content h1 {
+    font-size: 3.5rem;
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+    color: var(--text-color);
+    text-align: center; /* Center heading */
+  }
+
+  /* Introductory paragraph */
+  .volunteer-form-page-content .intro-paragraph {
+    font-size: 1.125rem;
+    line-height: 1.6;
+    margin-bottom: 1rem;
+    text-align: center; /* Center paragraph */
+    max-width: 700px; /* Constrain width for readability */
+    align-self: center; /* Center block itself */
+  }
+
+  /* Container for the Google Form iframe */
+  .google-form-embed-container {
+    width: 100%;
+    /* Max width will be handled by the parent .volunteer-form-page-content */
+    padding: 1rem; /* Padding around the iframe */
+    background-color: #f9f9f9; /* Slight background for the embed area */
+    border-radius: 8px;
+    border: 1px solid #eee;
+    box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.05); /* Inner shadow */
+    overflow: hidden; /* Ensures iframe respects border-radius */
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Center iframe if it's smaller than container */
+  }
+
+  .google-form-embed-container iframe {
+    border: none; /* Remove iframe default border */
+    width: 100%; /* Make iframe take full width of its container */
+    min-height: 700px; /* Minimum height for better form display on smaller screens */
+    /* Adjust height as needed after you embed your form.
+       Google forms often adjust their height dynamically, but you might need to
+       tweak this `min-height` or the `height` attribute in your iframe embed code. */
+  }
+
+  /* Responsive Adjustments */
+  @media (max-width: 767px) {
+    .volunteer-form-page-content {
+      padding: 1.5rem 1rem;
+      margin: 2rem auto;
+      gap: 1.5rem;
+    }
+    .volunteer-form-page-content h1 {
+      font-size: 2.5rem;
+    }
+    .intro-paragraph {
+      font-size: 1rem;
+    }
+    .google-form-embed-container {
+      padding: 0.5rem;
+    }
+    .google-form-embed-container iframe {
+      min-height: 600px; /* Smaller min-height for mobile */
+    }
+  }
+
+  @media (min-width: 768px) {
+    .volunteer-form-page-content {
+      padding: 4rem 3rem;
+    }
+    .volunteer-form-page-content h1 {
+      font-size: 4.5rem;
+    }
+  }
+</style>
