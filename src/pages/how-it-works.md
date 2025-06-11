@@ -18,7 +18,7 @@ We are a community dedicated to sustainable fashion and reducing waste through c
 - **Basics & Accessories**: 1 token per item. This includes T-shirts, tank tops, scarves, hats, jewelry, activewear tops, kids' smaller clothes, and sleepwear.
 - **Everyday Wear**: 3 tokens per item. This includes Blouses, shirts, skirts, shorts, jeans, trousers, light sweaters, and simple dresses.
 - **Outerwear & Premium**: 5 tokens per item. This includes Jackets, coats, blazers, formal dresses, suits, and designer items.
-- **Out of tokkens?** No problem! You can purchase additional tokens at events for $1 each.
+- **Out of tokens?** No problem! You can purchase additional tokens at events for $1 each.
 
 ## Prepare
 
