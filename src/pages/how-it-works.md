@@ -23,7 +23,7 @@ Here, you can find information about our upcoming events, how to participate, an
 
 ## Prepare
 
-To learn more about how to prepare for a clothing swap, check out our [Prepare Guide](/clothingswaps/prepare).
+To learn more about how to prepare for a clothing swap, check out our [Prepare Guide](/prepare).
 
 <style>
   main * {
