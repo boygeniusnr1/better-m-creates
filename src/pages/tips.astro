@@ -2,6 +2,7 @@
 // src/pages/tips.astro
 import Layout from "../layouts/Layout.astro";
 const pageTitle = "Tips - Clothes Swap Society";
+import { YouTube } from "astro-embed";
 ---
 
 <Layout pageTitle={pageTitle}>
@@ -25,10 +26,22 @@ const pageTitle = "Tips - Clothes Swap Society";
         Add some vinegar onto the stain, then rub on a bit of baking soda.
       </li>
     </ul>
-    <p class="outro-paragraph">
-      Following these tips will help ensure that your clothes are clean and
-      ready for swapping!
+    <a
+      href="https://www.ihateironing.com/blog/laundry-symbols-explained/"
+      class="outro-paragraph"
+      >Here's a guide on understanding laundry symbols. You can also often find
+      this with modern phones by scanning the label with your camera app.
+    </a>
+
+    <h1>Tips for folding clothes</h1>
+    <p>
+      Here's an easy way to fold clothes quickly, with just a cardboard box!
     </p>
+    <YouTube id="2oukO2qD4Os" />
+    <p>To fold them quickly:</p>
+    <YouTube id="uz6rjbw0ZA0" />
+    <p>For Jeans:</p>
+    <YouTube id="TmevWuXfqnY" />
   </div>
 </Layout>
 

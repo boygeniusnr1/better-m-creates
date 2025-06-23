@@ -4,7 +4,8 @@ layout: ../layouts/MDLayout.astro
 
 # Welcome to the Clothes Swap Society!
 
-We are a community dedicated to sustainable fashion and reducing waste through clothing swaps. Here, you can find information about our upcoming events, how to participate, and tips for making the most of your clothing swap experience.
+We are a community dedicated to sustainable fashion and reducing waste through clothing swaps.
+Here, you can find information about our upcoming events, how to participate, and tips for making the most of your clothing swap experience.
 
 ## How it works
 
