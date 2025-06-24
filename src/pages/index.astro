@@ -4,7 +4,7 @@ const pageTitle = "Home - Clothes Swap Society";
 import { Picture } from "astro:assets";
 import HowItWorksImage from "../assets/how-it-works.webp";
 import UpcomingSwapsImage from "../assets/upcoming-swaps.webp";
-import Card from "../components/Card.astro";
+import Swaps from "../components/Swaps.astro";
 ---
 
 <Layout pageTitle={pageTitle}>
@@ -41,6 +41,7 @@ import Card from "../components/Card.astro";
           widths={[300, 600, 900]}
           formats={["webp"]}
           loading={"eager"}
+          fetchpriority={"high"}
         />
       </div>
       <div class="how-it-works-content">
@@ -62,9 +63,7 @@ import Card from "../components/Card.astro";
       <div class="upcoming-swaps-text-column">
         <h2>Upcoming Swaps</h2>
         <div class="swap-cards-container">
-          <h3>No upcoming swaps at the moment.</h3>
-          <p>Check back later for new events!</p>
-          <!-- <Card title="Swap Event 1" date="March 15, 2024" time="2:00 PM - 5:00 PM" address="123 Swap St, City" /> -->
+          <Swaps />
         </div>
       </div>
       <div class="upcoming-swaps-image-column">

@@ -5,132 +5,154 @@ const pageTitle = "Contact Us - Clothes Swap Society";
 ---
 
 <Layout pageTitle={pageTitle}>
-  <style is:global>
-    body {
-      background-color: #f9f7f3; /* Light creamy background for the entire page */
-    }
-    main#main-content {
-      padding-top: 0;
-      padding-bottom: 0;
-    }
-  </style>
+  <div class="content contact-page-container">
+    {/* This container manages overall page margins and spacing */}
+    <div class="contact-page-main-wrapper">
+      {/* This is the main white card wrapper */}
+      <div class="contact-header">
+        <h1>Contact us</h1>
+      </div>
 
-  <div class="contact-page-container">
-    <div class="contact-header">
-      <h1>Contact us</h1>
-    </div>
-
-    <div class="contact-email-section">
-      <h2>E-mail</h2>
-      <p><a href="mailto:max@m-creates.com">max@m-creates.com</a></p>
+      <div class="contact-email-section">
+        <h2>E-mail</h2>
+        <p>
+          <a href="mailto:max@clothesswapsociety.com"
+            >max@clothesswapsociety.com</a
+          >
+        </p>
+      </div>
     </div>
 
     <section class="volunteer-section">
       <h2>Want to Volunteer?</h2>
-      <p>
-        Please visit the <a href="/volunteer">Volunteer page here.</a>
-      </p>
+      <p>Please visit the <a href="/volunteer">Volunteer page here.</a></p>
     </section>
   </div>
 </Layout>
 
 <style>
-  /* Overall container for the contact page content to control horizontal padding and centering */
+  /* Overall container for the page content, now controlling max-width and horizontal padding */
   .contact-page-container {
-    /* max-width is removed as per your request */
-    margin: 4rem auto; /* Top/bottom margin and horizontal centering */
-    padding: 0 1.5rem; /* Default horizontal padding for all screen sizes */
+    margin: 4rem auto; /* Top/bottom margin, horizontal centering */
+    padding: 0 1.5rem; /* RE-ADDED: Horizontal padding for consistent spacing from viewport edges */
     display: flex;
     flex-direction: column;
     gap: 3rem; /* Space between the main content blocks */
+    /* REMOVED: width: 100%; - it will implicitly fill max-width now */
+  }
+
+  /* Main white card wrapper for Contact and Email sections */
+  .contact-page-main-wrapper {
+    background-color: #ffffff; /* White background for this main content block */
+    border-radius: 12px; /* Consistent rounded corners */
+    box-shadow: 0 10px 15px rgba(0, 0, 0, 0.05); /* Subtle shadow */
+    /* Internal padding remains for text readability */
+    padding: 2.5rem 1.5rem; /* Vertical and horizontal internal padding */
+    margin: 0; /* No external margins, let parent container handle spacing */
+    display: flex;
+    flex-direction: column;
+    gap: 2rem; /* Space between main heading and email section */
+    color: var(--text-color);
+    width: 100%; /* Ensure it fills the contact-page-container */
+  }
+
+  /* Adjustments for the green volunteer section */
+  .volunteer-section {
+    /* Internal padding remains for text readability */
+    padding: 3rem 2rem; /* Vertical and horizontal internal padding */
+    margin: 0; /* No external margins, let parent container handle spacing */
+    width: 100%; /* Ensure it fills the contact-page-container */
+    background-color: #87bd74;
+    border-radius: 12px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    color: #ffffff;
+    box-shadow: 0 10px 15px rgba(0, 0, 0, 0.1);
   }
 
   /* Section for the main "Contact us" heading */
   .contact-header {
-    text-align: left; /* Align heading to the left */
-    color: var(--text-color); /* Use your defined text color */
+    text-align: left;
+    color: var(--text-color);
   }
 
   .contact-header h1 {
-    font-size: 4.5rem; /* Large size as seen in the screenshot */
-    font-weight: 500;
-    margin: 0; /* Remove default margins to control spacing precisely */
-    line-height: 1.1; /* Adjust line height for better visual spacing */
+    font-size: 3.5rem;
+    font-weight: 700;
+    margin: 0;
+    line-height: 1.1;
   }
 
   /* Section for the email information */
   .contact-email-section {
-    text-align: left; /* Align content to the left */
+    text-align: left;
     color: var(--text-color);
-    margin-top: -1.5rem; /* Pull up closer to h1 as per screenshot */
+    margin-top: 0;
   }
 
   .contact-email-section h2 {
-    font-size: 2.5rem; /* Matches "E-mail" heading size in screenshot */
-    font-weight: 500;
-    margin-bottom: 0.5rem; /* Space between heading and email link */
-    margin-top: 0; /* Remove default top margin */
+    font-size: 2.5rem;
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+    margin-top: 0;
   }
 
   .contact-email-section p a {
-    font-size: 1.125rem; /* Size of the email link text */
-    color: #0000ee; /* Standard blue link color from screenshot */
+    font-size: 1.125rem;
+    color: #0000ee;
     text-decoration: underline;
     transition: color 0.3s ease;
   }
 
   .contact-email-section p a:hover {
-    color: var(--accent-color); /* Your site's accent color on hover */
+    color: var(--accent-color);
   }
 
-  /* Volunteer Section (the distinct green box) */
-  .volunteer-section {
-    width: 100%;
-    background-color: #87bd74; /* Green background color from the screenshot */
-    border-radius: 12px;
-    padding: 3rem 2rem; /* Ample internal padding */
-    display: flex;
-    flex-direction: column;
-    align-items: center; /* Center content horizontally */
-    text-align: center;
-    color: #ffffff; /* White text color for contrast */
-    box-shadow: 0 10px 15px rgba(0, 0, 0, 0.1); /* Subtle shadow */
-  }
-
+  /* Volunteer Section specific styling - now just handling internal elements */
   .volunteer-section h2 {
-    font-size: 2.8rem; /* Large heading size from screenshot */
+    font-size: 2.8rem;
     font-weight: 700;
-    margin-bottom: 0.5rem; /* Closer spacing to paragraph as in screenshot */
+    margin-bottom: 0.5rem;
     line-height: 1.2;
-    margin-top: 0; /* Remove default top margin */
+    margin-top: 0;
   }
 
   .volunteer-section p {
-    font-size: 1.2rem; /* Paragraph text size */
+    font-size: 1.2rem;
     line-height: 1.5;
-    margin: 0; /* Remove default margins */
+    margin: 0;
   }
 
   .volunteer-section p a {
-    color: #ffffff; /* White link color */
+    color: #ffffff;
     text-decoration: underline;
-    font-weight: 500;
+    font-weight: 600;
   }
 
   .volunteer-section p a:hover {
-    color: rgba(255, 255, 255, 0.8); /* Slightly faded white on hover */
+    color: rgba(255, 255, 255, 0.8);
   }
 
   /* Responsive Adjustments */
   @media (max-width: 767px) {
     .contact-page-container {
-      margin: 2rem auto;
+      margin: 2rem auto; /* Adjust vertical margin for mobile */
+      gap: 2rem;
+      padding: 0 1rem; /* Smaller horizontal padding for mobile */
+    }
+    .contact-page-main-wrapper {
+      padding: 1.5rem 1rem; /* Smaller internal horizontal padding for mobile */
     }
     .contact-header h1 {
-      font-size: 3.5rem;
+      font-size: 2.5rem;
     }
     .contact-email-section h2 {
       font-size: 2rem;
+    }
+    .volunteer-section {
+      padding: 2rem 1.5rem; /* Smaller internal horizontal padding for mobile */
     }
     .volunteer-section h2 {
       font-size: 2.2rem;
@@ -140,10 +162,15 @@ const pageTitle = "Contact Us - Clothes Swap Society";
     }
   }
 
-  /* For larger screens (768px and up), increase horizontal padding for better readability */
   @media (min-width: 768px) {
-    .contact-page-container {
-      padding: 0 4rem; /* Increased horizontal padding on desktop */
+    .contact-page-main-wrapper {
+      padding: 4rem 3rem; /* Larger internal horizontal padding for desktop */
+    }
+    .contact-header h1 {
+      font-size: 4.5rem;
+    }
+    .volunteer-section {
+      padding: 4rem 3rem; /* Larger internal horizontal padding for desktop */
     }
   }
 </style>
