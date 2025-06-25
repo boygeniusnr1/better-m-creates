@@ -1,4 +1,13 @@
 ---
+// src/components/Card.astro
+interface Props {
+  title: string;
+  date: string;
+  time: string;
+  address: string;
+  url: string;
+}
+
 const { title, date, time, address, url } = Astro.props;
 ---
 
@@ -12,14 +21,36 @@ const { title, date, time, address, url } = Astro.props;
 </div>
 <style>
   .swap-card {
-    background-color: #fff7eb; /* Slightly off-white for cards */
-    border-radius: 8px;
-    padding: 1.25rem;
-    color: var(--text-color);
+    background-color: #fff7eb; /* As per your new attention box color */
+    border-radius: 12px; /* Consistent rounded corners */
+    padding: 1.5rem; /* Internal padding */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05); /* Subtle shadow */
+    border: 1px solid #ffe8cc; /* Border color for this light background */
+    color: var(--text-color); /* Inherit text color */
+    transition:
+      transform 0.2s ease-in-out,
+      box-shadow 0.2s ease-in-out; /* Smooth hover effect */
+    height: 100%; /* Important for grid layouts, ensures all cards stretch to same height */
+    display: flex; /* Use flex to align content within the card */
+    flex-direction: column;
+    justify-content: space-between; /* Pushes content apart, details at top, gaps evenly distributed */
+  }
+
+  .swap-link {
+    text-decoration: none; /* Remove underline from the link */
+    color: inherit; /* Ensure text color is inherited from parent */
+    display: block; /* Make the link a block element to wrap the card content */
+    height: 100%; /* Ensure the clickable link fills the entire card */
+  }
+
+  /* Apply hover effect to the card container */
+  .swap-card:hover {
+    transform: translateY(-5px); /* Lift card slightly on hover */
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1); /* More prominent shadow on hover */
   }
 
   .swap-card h3 {
-    font-size: 1.5rem;
+    font-size: 1.75rem; /* Larger heading for the swap name */
     font-weight: 600;
     margin-bottom: 0.75rem;
     color: var(--accent-color); /* Use accent color for swap names */
@@ -28,14 +59,23 @@ const { title, date, time, address, url } = Astro.props;
   .swap-card p {
     font-size: 1rem;
     line-height: 1.5;
-    margin-bottom: 0.5rem;
+    margin-bottom: 0.5rem; /* Space between paragraphs */
   }
 
   .swap-card p:last-child {
-    margin-bottom: 0;
+    margin-bottom: 0; /* No bottom margin on the last paragraph */
   }
-  .swap-link {
-    text-decoration: none;
-    color: inherit; /* Inherit color from parent */
+
+  /* Responsive adjustments for smaller screens */
+  @media (max-width: 767px) {
+    .swap-card {
+      padding: 1.2rem;
+    }
+    .swap-card h3 {
+      font-size: 1.5rem;
+    }
+    .swap-card p {
+      font-size: 0.95rem;
+    }
   }
 </style>

@@ -1,0 +1,22 @@
+---
+// src/pages/swaps/[slug].astro
+import SwapDetailLayout from "../../layouts/SwapDetailLayout.astro";
+import { swapEventsDetails } from "../../data/swaps"; // Import your swap data
+
+// This function tells Astro which pages to build at build time
+export async function getStaticPaths() {
+  return swapEventsDetails.map((swap) => ({
+    params: { slug: swap.slug }, // 'slug' must match the filename part: [slug]
+    props: swap, // Pass the entire swap object as props to the component below
+  }));
+}
+
+// Access the props passed from getStaticPaths
+const { title, date, time, address, description } = Astro.props;
+---
+
+<!-- Use the SwapDetailLayout component, passing the relevant props -->
+<SwapDetailLayout title={title} date={date} time={time} address={address}>
+  <!-- The content for the <slot /> in SwapDetailLayout -->
+  <Fragment set:html={description} />
+</SwapDetailLayout>

@@ -1,11 +1,169 @@
 ---
-import Card from "./Card.astro";
+// src/components/Swaps.astro
+import Card from "./Card.astro"; // Import the individual Card component
+import { swapEventsDetails } from "../data/swaps.js"; // Import your swap data
+
+// Add an optional 'limit' prop
+interface Props {
+  limit?: number; // '?' makes it optional
+}
+const { limit } = Astro.props;
+
+// Apply the limit if provided, otherwise use all events
+const displayedSwaps = limit
+  ? swapEventsDetails.slice(0, limit)
+  : swapEventsDetails;
 ---
 
-<Card
-  title="Tahunanui School Swap"
-  date="Tue 15/7/25"
-  time="2:45 PM - 3:30 PM"
-  address="69 Muritai Street, Tahunanui, Nelson"
-  url="/swaps/tahunanui-school-swap"
-/>
+<section class="swaps-section-component">
+  <h1>Upcoming Swaps</h1>
+  <p class="intro-paragraph">
+    Join us at one of our upcoming clothing swap events! It's a fantastic
+    opportunity to refresh your wardrobe sustainably and connect with your
+    community.
+  </p>
+
+  <div class="swap-cards-grid">
+    {/* Loop through the (potentially limited) displayedSwaps data */}
+    {
+      displayedSwaps.map((event) => (
+        <Card
+          title={event.title}
+          date={event.date}
+          time={event.time}
+          address={event.address}
+          url={`/swaps/${event.slug}`}
+        />
+      ))
+    }
+  </div>
+
+  <div class="call-to-action-section">
+    <h2>Want to Host a Swap?</h2>
+    <p>
+      If you're interested in organizing a swap in your neighborhood or at your
+      organization, we'd love to help!
+    </p>
+    <p>
+      <a href="/contact">Contact us to learn more.</a>
+    </p>
+  </div>
+</section>
+
+<style>
+  /* Base styles for the entire Swaps section component */
+  .swaps-section-component {
+    padding: 2.5rem 1.5rem;
+    display: flex;
+    flex-direction: column;
+    gap: 2.5rem;
+    color: var(--text-color);
+    background-color: #ffffff;
+    border-radius: 12px;
+    box-shadow: 0 10px 15px rgba(0, 0, 0, 0.05);
+    margin: 4rem auto;
+  }
+
+  /* Main heading for the page */
+  .swaps-section-component h1 {
+    font-size: 3.5rem;
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+    color: var(--text-color);
+  }
+
+  /* Introductory paragraph */
+  .swaps-section-component .intro-paragraph {
+    font-size: 1.125rem;
+    line-height: 1.6;
+    margin-bottom: 1.5rem;
+  }
+
+  /* Grid container for the swap cards */
+  .swap-cards-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+
+  /* Responsive adjustments for grid columns */
+  @media (min-width: 640px) {
+    .swap-cards-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .swap-cards-grid {
+      grid-template-columns: repeat(3, 1fr);
+    }
+  }
+
+  /* Call to action section at the bottom */
+  .call-to-action-section {
+    background-color: #fff7eb;
+    border: 1px solid #ffe8cc;
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.08);
+    padding: 2rem;
+    border-radius: 12px;
+    text-align: center;
+    margin-top: 1.5rem;
+  }
+
+  .call-to-action-section h2 {
+    font-size: 2rem;
+    font-weight: 600;
+    color: var(--text-color);
+    margin-bottom: 0.75rem;
+  }
+
+  .call-to-action-section p {
+    font-size: 1.125rem;
+    line-height: 1.6;
+    margin-bottom: 0.5rem;
+    color: var(--text-color);
+  }
+
+  .call-to-action-section p a {
+    color: var(--text-color);
+    text-decoration: underline;
+    font-weight: 600;
+  }
+
+  .call-to-action-section p a:hover {
+    color: var(--accent-color);
+  }
+
+  /* General Responsive Adjustments */
+  @media (max-width: 767px) {
+    .swaps-section-component {
+      padding: 1.5rem 1rem;
+      margin: 2rem auto;
+      gap: 1.5rem;
+    }
+    .swaps-section-component h1 {
+      font-size: 2.5rem;
+    }
+    .intro-paragraph {
+      font-size: 1rem;
+    }
+    .call-to-action-section {
+      padding: 1.5rem;
+    }
+    .call-to-action-section h2 {
+      font-size: 1.5rem;
+    }
+    .call-to-action-section p {
+      font-size: 1rem;
+    }
+  }
+
+  @media (min-width: 768px) {
+    .swaps-section-component {
+      padding: 4rem 3rem;
+    }
+    .swaps-section-component h1 {
+      font-size: 4.5rem;
+    }
+  }
+</style>

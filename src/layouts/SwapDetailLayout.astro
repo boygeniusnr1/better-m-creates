@@ -1,0 +1,501 @@
+---
+// src/layouts/SwapDetailLayout.astro
+import Layout from "./Layout.astro"; // Assuming Layout.astro is in the same directory
+interface Props {
+  title: string;
+  date: string; // e.g., "Tuesday, 15th July, 2025" or "Tue 15/7/25" (will try to parse)
+  time: string; // e.g., "2:45 PM - 3:30 PM"
+  address: string;
+}
+
+const { date, time, address, title } = Astro.props;
+const pageTitle = `${title} - Clothes Swap Society`;
+
+// --- START ROBUST DATE PARSING LOGIC ---
+
+// Helper map for month names to 0-indexed numbers (for JavaScript Date constructor)
+const monthMap: { [key: string]: number } = {
+  January: 0,
+  February: 1,
+  March: 2,
+  April: 3,
+  May: 4,
+  June: 5,
+  July: 6,
+  August: 7,
+  September: 8,
+  October: 9,
+  November: 10,
+  December: 11,
+};
+
+/**
+ * Parses various date and time string formats into an ISO 8601 string.
+ * This function tries to be more robust by extracting components.
+ * Supported date formats:
+ * - "Weekday, Dayth Month, Year" (e.g., "Tuesday, 15th July, 2025")
+ * - "Day/Month/Year" (e.g., "15/7/25" or "01/01/2025")
+ * - "Weekday Day/Month/Year" (e.g., "Tue 15/7/25")
+ * Supported time formats: "HH:MM AM/PM - HH:MM AM/PM" (takes the start time)
+ * @param dateString - Original date string from props.
+ * @param timeString - Original time string from props.
+ * @returns ISO 8601 string (e.g., "2025-07-15T14:45:00.000Z") or null if parsing fails.
+ */
+function parseEventDateTimeToISO(
+  dateString: string,
+  timeString: string
+): string | null {
+  let year: number | undefined;
+  let month: number | undefined;
+  let day: number | undefined;
+
+  // STEP 1: Clean the date string by removing weekday abbreviations and "th/st/nd/rd" suffixes.
+  // This makes the string more consistently parseable by subsequent regexes.
+  // Also remove commas, as they can interfere.
+  let cleanedDateInput = dateString
+    .replace(/^(Mon|Tue|Wed|Thu|Fri|Sat|Sun)\s*,?\s*/i, "") // Remove optional weekday + comma + space
+    .replace(/(\d+)(st|nd|rd|th)/g, "$1") // Remove date suffixes (e.g., '15th' -> '15')
+    .replace(/,/g, "") // Remove any remaining commas
+    .trim(); // Trim any leading/trailing whitespace
+
+  // console.log(`[parseEventDateTimeToISO] Cleaned date input for parsing: "${cleanedDateInput}"`); // Debugging line
+
+  // STEP 2: Try parsing "Day Month Year" format (e.g., "15 July 2025")
+  const humanDateFormatMatch = cleanedDateInput.match(
+    /(\d{1,2})\s+(\w+)\s+(\d{4})/i
+  );
+  if (humanDateFormatMatch) {
+    const [, dayStr, monthNameRaw, yearStr] = humanDateFormatMatch;
+    const monthName =
+      monthNameRaw.charAt(0).toUpperCase() +
+      monthNameRaw.slice(1).toLowerCase();
+    month = monthMap[monthName];
+    day = parseInt(dayStr, 10);
+    year = parseInt(yearStr, 10);
+  } else {
+    // STEP 3: If not "Day Month Year", try parsing "Day/Month/Year" format (e.g., "15/7/25")
+    const slashDateFormatMatch = cleanedDateInput.match(
+      /(\d{1,2})\/(\d{1,2})\/(\d{2,4})/
+    );
+    if (slashDateFormatMatch) {
+      const [, dayStr, monthStr, yearRaw] = slashDateFormatMatch;
+      day = parseInt(dayStr, 10);
+      month = parseInt(monthStr, 10) - 1; // Month is 0-indexed in JS Date
+      year = parseInt(yearRaw, 10);
+      if (year < 100) year += 2000; // Assume 2-digit years are 20xx
+    } else {
+      console.error(
+        "[parseEventDateTimeToISO] No supported date format found after cleaning for:",
+        dateString
+      );
+      return null;
+    }
+  }
+
+  // Basic validation for date parts (monthMap check is done inside the match blocks)
+  if (
+    year === undefined ||
+    month === undefined ||
+    day === undefined ||
+    isNaN(year) ||
+    isNaN(month) ||
+    isNaN(day) ||
+    month < 0 ||
+    month > 11 ||
+    day < 1 ||
+    day > 31
+  ) {
+    // Day check is very basic
+    console.error(
+      "[parseEventDateTimeToISO] Invalid date components extracted or month mapping failed:",
+      { year, month, day }
+    );
+    return null;
+  }
+
+  // STEP 4: Parse timeString (e.g., "2:45 PM - 3:30 PM")
+  const startTimePart = timeString.split(" - ")[0].trim(); // Get "2:45 PM"
+  const timeAmpmMatch = startTimePart.match(/(\d{1,2}):(\d{2})\s*(AM|PM)/i);
+
+  if (!timeAmpmMatch) {
+    console.error(
+      "[parseEventDateTimeToISO] Failed to extract time parts from time string:",
+      startTimePart
+    );
+    return null;
+  }
+
+  let [, hoursStr, minutesStr, ampm] = timeAmpmMatch;
+  let hours = parseInt(hoursStr, 10);
+  const minutes = parseInt(minutesStr, 10);
+
+  // Convert 12-hour AM/PM to 24-hour format
+  if (ampm.toUpperCase() === "PM" && hours < 12) {
+    hours += 12;
+  } else if (ampm.toUpperCase() === "AM" && hours === 12) {
+    // Midnight (12 AM)
+    hours = 0;
+  }
+
+  // Basic validation for time parts
+  if (
+    isNaN(hours) ||
+    isNaN(minutes) ||
+    hours < 0 ||
+    hours > 23 ||
+    minutes < 0 ||
+    minutes > 59
+  ) {
+    console.error(
+      "[parseEventDateTimeToISO] Invalid time components extracted:",
+      { hours, minutes }
+    );
+    return null;
+  }
+
+  // STEP 5: Construct a Date object and convert to ISO string
+  const eventDateObj = new Date(year, month, day, hours, minutes);
+
+  // Check if the constructed date is valid (e.g., handles "February 30th" or invalid numbers)
+  if (isNaN(eventDateObj.getTime())) {
+    console.error(
+      "[parseEventDateTimeToISO] Constructed Date object is invalid. Components used:",
+      { year, month, day, hours, minutes }
+    );
+    return null;
+  }
+
+  // Return ISO 8601 string
+  return eventDateObj.toISOString();
+}
+
+const eventDateTimeISO = parseEventDateTimeToISO(date, time);
+
+// If parsing fails, pass null or an empty string. The JS will handle the error message.
+const eventDateForCountdown = eventDateTimeISO || "";
+---
+
+<Layout pageTitle={pageTitle}>
+  <div class="content swap-detail-page-content">
+    <h1>{title}</h1>
+
+    <div class="event-details-card">
+      <p><strong>Date:</strong> {date}</p>
+      <p><strong>Time:</strong> {time}</p>
+      <p><strong>Address:</strong> {address}</p>
+    </div>
+
+    <!-- Countdown Timer Section -->
+    <div
+      class="countdown-timer-section"
+      id="countdown-timer-section"
+      data-event-date={eventDateForCountdown}
+      {/* CORRECTED LINE HERE */}
+    >
+      <p class="countdown-label">Time until swap starts:</p>
+      <div id="countdown-display" class="countdown-display">
+        <span id="days">00</span><small>Days</small>
+        <span id="hours">00</span><small>Hours</small>
+        <span id="minutes">00</span><small>Minutes</small>
+        <span id="seconds">00</span><small>Seconds</small>
+      </div>
+      <p id="event-passed-message" class="event-passed-message hidden">
+        This swap has already started!
+      </p>
+    </div>
+    <!-- End Countdown Timer Section -->
+
+    <div class="description-section">
+      <h2>About This Swap</h2>
+      <div>
+        <slot />
+      </div>
+      <p>
+        Remember to check our <a href="/prepare">Prepare page</a> for guidelines
+        on what to bring and how to make sure your items are ready for swapping.
+        We can't wait to see you there!
+      </p>
+    </div>
+
+    <div class="call-to-action-section">
+      <h2>Got Questions?</h2>
+      <p>
+        If you have any questions about this specific swap or need further
+        details, please don't hesitate to <a href="/contact">contact us</a>.
+      </p>
+    </div>
+  </div>
+</Layout>
+
+<script is:inline>
+  document.addEventListener("DOMContentLoaded", () => {
+    const countdownSection = document.getElementById("countdown-timer-section");
+    const countdownDisplay = document.getElementById("countdown-display");
+    const eventPassedMessage = document.getElementById("event-passed-message");
+
+    if (!countdownSection || !countdownDisplay || !eventPassedMessage) {
+      console.error("Countdown elements not found. Cannot start timer.");
+      return;
+    }
+
+    const eventDateString = countdownSection.dataset.eventDate;
+    const eventDate = new Date(eventDateString).getTime(); // Get target date in milliseconds
+
+    if (isNaN(eventDate) || eventDateString === "") {
+      console.error(
+        "Invalid event date string from data-attribute or parsing failed in client-side JS:",
+        eventDateString
+      );
+      eventPassedMessage.textContent = `Error: Invalid event date or format. Input was: "${eventDateString}"`;
+      eventPassedMessage.classList.remove("hidden");
+      countdownDisplay.style.display = "none";
+      return;
+    }
+
+    const daysSpan = document.getElementById("days");
+    const hoursSpan = document.getElementById("hours");
+    const minutesSpan = document.getElementById("minutes");
+    const secondsSpan = document.getElementById("seconds");
+
+    function updateCountdown() {
+      const now = new Date().getTime(); // Current date and time
+      const distance = eventDate - now; // Distance between now and the event date
+
+      if (distance < 0) {
+        clearInterval(interval);
+        countdownDisplay.style.display = "none";
+        eventPassedMessage.textContent = "This swap has already started!"; // Reset message if it was an error
+        eventPassedMessage.classList.remove("hidden");
+        return;
+      }
+
+      const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+      const hours = Math.floor(
+        (distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)
+      );
+      const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+      const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+      daysSpan.textContent = String(days).padStart(2, "0");
+      hoursSpan.textContent = String(hours).padStart(2, "0");
+      minutesSpan.textContent = String(minutes).padStart(2, "0");
+      secondsSpan.textContent = String(seconds).padStart(2, "0");
+    }
+
+    const interval = setInterval(updateCountdown, 1000);
+    updateCountdown(); // Initial call to display immediately
+  });
+</script>
+
+<style>
+  /* Base styles for the content container on the swap detail page */
+  .swap-detail-page-content {
+    padding: 2.5rem 1.5rem; /* Consistent horizontal padding for all screens */
+    margin: 4rem auto; /* Top/bottom margin and horizontal centering */
+    display: flex;
+    flex-direction: column;
+    gap: 2.5rem; /* Space between main sections */
+    color: var(--text-color); /* Ensure text color is consistent */
+    background-color: #ffffff; /* White background for the main content block */
+    border-radius: 12px;
+    box-shadow: 0 10px 15px rgba(0, 0, 0, 0.05); /* Subtle shadow */
+  }
+
+  /* Main heading for the event title */
+  .swap-detail-page-content h1 {
+    font-size: 3.5rem; /* Consistent with other main page titles */
+    font-weight: 700;
+    margin-bottom: 1.5rem; /* Space below heading */
+    color: var(--text-color);
+  }
+
+  /* Styling for the event details card (Date, Time, Address) */
+  .event-details-card {
+    background-color: #f9f9f9; /* Slightly off-white, consistent with info cards */
+    border-radius: 12px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
+    padding: 1.8rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem; /* Space between detail lines */
+  }
+
+  .event-details-card p {
+    font-size: 1.125rem;
+    line-height: 1.6;
+    margin: 0; /* Remove default margins */
+  }
+
+  .event-details-card p strong {
+    color: var(--accent-color); /* Highlight the labels like Date, Time */
+  }
+
+  /* Countdown Timer Section Styling */
+  .countdown-timer-section {
+    background-color: #f0e2cc; /* Light, warm background for emphasis */
+    border: 1px solid #e0c8a0;
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.08);
+    padding: 2rem;
+    border-radius: 12px;
+    text-align: center;
+    color: var(--text-color);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+  }
+
+  .countdown-label {
+    font-size: 1.25rem;
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+  }
+
+  .countdown-display {
+    display: flex;
+    gap: 0.75rem;
+    align-items: baseline;
+  }
+
+  .countdown-display span {
+    font-size: 3rem; /* Large numbers for countdown */
+    font-weight: 700;
+    color: var(--accent-color); /* Highlight numbers */
+    line-height: 1; /* Keep numbers tight */
+  }
+
+  .countdown-display small {
+    font-size: 0.8rem; /* Small labels for Days, Hours, etc. */
+    font-weight: 500;
+    text-transform: uppercase;
+    color: #666;
+    margin-right: 0.5rem; /* Space between label and next number */
+  }
+
+  .event-passed-message {
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: var(--text-color);
+  }
+
+  .hidden {
+    display: none;
+  }
+
+  /* Styling for description sections */
+  .description-section {
+    background-color: #ffffff;
+    padding: 0;
+    margin: 0;
+  }
+
+  .description-section h2,
+  .call-to-action-section h2 {
+    font-size: 2rem;
+    font-weight: 600;
+    color: var(--accent-color);
+    margin-bottom: 1rem;
+  }
+
+  /* Adjusted styling for content within the slot */
+  .description-section > div > p {
+    font-size: 1.125rem;
+    line-height: 1.6;
+    margin-bottom: 1rem;
+  }
+
+  .description-section > div > p:last-child {
+    margin-bottom: 0;
+  }
+
+  .description-section p a {
+    color: #0000ee;
+    text-decoration: underline;
+    transition: color 0.3s ease;
+  }
+
+  .description-section p a:hover {
+    color: var(--accent-color);
+  }
+
+  /* Call to action section */
+  .call-to-action-section {
+    background-color: #fff7eb;
+    border: 1px solid #ffe0b2;
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.08);
+    padding: 2rem;
+    border-radius: 12px;
+    text-align: center;
+    margin-top: 1.5rem;
+  }
+
+  .call-to-action-section p {
+    font-size: 1.125rem;
+    line-height: 1.6;
+    margin-bottom: 0;
+  }
+
+  .call-to-action-section p a {
+    color: var(--text-color);
+    text-decoration: underline;
+    font-weight: 600;
+  }
+
+  .call-to-action-section p a:hover {
+    color: var(--accent-color);
+  }
+
+  /* Responsive Adjustments */
+  @media (max-width: 767px) {
+    .swap-detail-page-content {
+      padding: 1.5rem 1rem;
+      margin: 2rem auto;
+      gap: 1.5rem;
+    }
+    .swap-detail-page-content h1 {
+      font-size: 2.5rem;
+    }
+    .event-details-card {
+      padding: 1.2rem;
+    }
+    .event-details-card p {
+      font-size: 1rem;
+    }
+    .countdown-timer-section {
+      padding: 1.5rem;
+    }
+    .countdown-label {
+      font-size: 1rem;
+    }
+    .countdown-display span {
+      font-size: 2.2rem; /* Smaller numbers on mobile */
+    }
+    .countdown-display small {
+      font-size: 0.7rem;
+      margin-right: 0.3rem;
+    }
+    .event-passed-message {
+      font-size: 1rem;
+    }
+    .description-section h2,
+    .call-to-action-section h2 {
+      font-size: 1.5rem;
+    }
+    .description-section > div > p,
+    .call-to-action-section p {
+      font-size: 1rem;
+    }
+    .call-to-action-section {
+      padding: 1.5rem;
+    }
+  }
+
+  @media (min-width: 768px) {
+    .swap-detail-page-content {
+      padding: 4rem 3rem;
+    }
+    .swap-detail-page-content h1 {
+      font-size: 4.5rem;
+    }
+  }
+</style>

@@ -3,8 +3,8 @@ import Layout from "../layouts/Layout.astro";
 const pageTitle = "Home - Clothes Swap Society";
 import { Picture } from "astro:assets";
 import HowItWorksImage from "../assets/how-it-works.webp";
-import UpcomingSwapsImage from "../assets/upcoming-swaps.webp";
-import Swaps from "../components/Swaps.astro";
+// REMOVED: UpcomingSwapsImage is no longer used directly here as Swaps component handles it
+import Swaps from "../components/Swaps.astro"; // Import the Swaps component
 ---
 
 <Layout pageTitle={pageTitle}>
@@ -59,22 +59,10 @@ import Swaps from "../components/Swaps.astro";
         </p>
       </div>
     </div>
-    <div class="upcoming-swaps-section">
-      <div class="upcoming-swaps-text-column">
-        <h2>Upcoming Swaps</h2>
-        <div class="swap-cards-container">
-          <Swaps />
-        </div>
-      </div>
-      <div class="upcoming-swaps-image-column">
-        <Picture
-          src={UpcomingSwapsImage}
-          alt="People Browse clothes at a swap event"
-          widths={[300, 600, 900]}
-          formats={["webp"]}
-        />
-      </div>
-    </div>
+
+    {/* CORRECTED: The Swaps component is now a direct child of .content */}
+    {/* It automatically provides its own background, padding, and layout */}
+    <Swaps limit={3} />
   </div>
 </Layout>
 <style>
@@ -82,6 +70,7 @@ import Swaps from "../components/Swaps.astro";
     display: flex;
     justify-content: flex-start;
     flex-direction: column; /* Allow sections to stack */
+    gap: 2rem; /* Add gap between top-level sections */
   }
 
   /* Hero Section Container */
@@ -166,23 +155,21 @@ import Swaps from "../components/Swaps.astro";
     box-shadow: 0 10px 15px rgba(0, 0, 0, 0.05);
     padding: 2rem; /* Provides internal spacing around content */
     text-align: left; /* This is correct for left alignment */
-    color: var(
-      --text-color
-    ); /* Ensures text is black as per your --text-color variable */
+    color: var(--text-color);
   }
 
   .section-container h2 {
     font-size: 3rem;
     font-weight: 500; /* Bold */
     margin-bottom: 1rem;
-    color: var(--text-color); /* Ensures heading is black */
+    color: var(--text-color);
   }
 
   .section-container p {
     font-size: 1.125rem;
     line-height: 1.6;
     max-width: 700px; /* Constrains paragraph width for readability */
-    margin-left: 0; /* Explicitly set left margin if max-width is used */
+    margin-left: 0;
     margin-right: 0;
   }
   /* How it works section */
@@ -264,74 +251,15 @@ import Swaps from "../components/Swaps.astro";
     color: var(--accent-color); /* Hover accent */
   }
 
-  .upcoming-swaps-section {
-    width: 100%;
-    background-color: #ffffff; /* White background for the section box */
-    box-shadow: 0 10px 15px rgba(0, 0, 0, 0.05);
-    padding: 2rem;
-    display: flex;
-    flex-direction: column; /* Stack columns on small screens */
-    gap: 2rem; /* Space between text and image columns */
-    align-items: center; /* Center horizontally when stacked */
-  }
-
-  .upcoming-swaps-text-column {
-    flex-grow: 1; /* Allow text column to take available space */
-    width: 100%; /* Full width on small screens */
-    text-align: left;
-    color: var(--text-color);
-  }
-
-  .upcoming-swaps-text-column h2 {
-    font-size: 3rem; /* Consistent heading size */
-    font-weight: 500;
-    margin-bottom: 1.5rem;
-    color: var(--text-color);
-  }
-
-  .swap-cards-container {
-    display: flex;
-    flex-direction: column; /* Stack swap cards vertically */
-    gap: 1.5rem; /* Space between individual swap cards */
-  }
-
-  .swap-card {
-    background-color: #fff7eb; /* Slightly off-white for cards */
-    border-radius: 8px;
-    padding: 1.25rem;
-    color: var(--text-color);
-  }
-
-  .swap-card h3 {
-    font-size: 1.5rem;
-    font-weight: 600;
-    margin-bottom: 0.75rem;
-    color: var(--accent-color); /* Use accent color for swap names */
-  }
-
-  .swap-card p {
-    font-size: 1rem;
-    line-height: 1.5;
-    margin-bottom: 0.5rem;
-  }
-
-  .swap-card p:last-child {
-    margin-bottom: 0;
-  }
-
-  .upcoming-swaps-image-column {
-    border-radius: 30px;
-    overflow: hidden;
-    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
-    height: 100%;
-  }
-
-  .upcoming-swaps-image-column picture,
-  .upcoming-swaps-image-column img {
-    width: 100%;
-    display: block;
-    object-fit: cover;
-  }
+  /* REMOVED ALL THE FOLLOWING REDUNDANT CSS */
+  /* .upcoming-swaps-section { ... } */
+  /* .upcoming-swaps-text-column { ... } */
+  /* .swap-cards-container { ... } */
+  /* .swap-card { ... } */
+  /* .swap-card h3 { ... } */
+  /* .swap-card p { ... } */
+  /* .upcoming-swaps-image-column { ... } */
+  /* .upcoming-swaps-image-column picture, img { ... } */
 
   /* Responsive Adjustments */
   @media (min-width: 768px) {
@@ -379,20 +307,6 @@ import Swaps from "../components/Swaps.astro";
     .how-it-works-content {
       width: 50%; /* Text takes roughly 50% width on desktop */
       margin-left: 50px;
-    }
-
-    .upcoming-swaps-section {
-      flex-direction: row; /* Side-by-side on larger screens */
-      justify-content: space-between;
-      align-items: flex-start; /* Align content to the top of each column */
-      padding: 4rem;
-    }
-
-    .upcoming-swaps-text-column {
-      width: 60%; /* Text column takes 60% on desktop */
-    }
-    .upcoming-swaps-image-column {
-      width: 45%; /* Image column takes 35% on desktop (leaving space for gap) */
     }
   }
 </style>
