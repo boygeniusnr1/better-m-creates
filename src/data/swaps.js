@@ -14,7 +14,7 @@ export const swapEventsDetails = [
         members to refresh their wardrobes sustainably. 
         To turn this event into a success, we need your help!
         The quality and amount of clothing brought in will determine what you can choose from. 
-        So please bring in stuff just as nice as the stuff you hope to bring home with you from the swap.
+        So please bring in clothes just as nice as the clothes you hope to bring home with you from the swap.
         Happy faces, kindness and and some patience will contribute to a nice and relaxed atmosphere.
         <br><br>
         
