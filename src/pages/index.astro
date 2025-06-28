@@ -1,312 +1,344 @@
 ---
-import Layout from "../layouts/Layout.astro";
+import Layout from "../layouts/HeadLayout.astro";
+import "../pages/styles/global.css";
 const pageTitle = "Home - Clothes Swap Society";
 import { Picture } from "astro:assets";
 import HowItWorksImage from "../assets/how-it-works.webp";
 // REMOVED: UpcomingSwapsImage is no longer used directly here as Swaps component handles it
 import Swaps from "../components/Swaps.astro"; // Import the Swaps component
+import Header from "../components/Header.astro";
+import Footer from "../components/Footer.astro";
+import { GoogleFontsOptimizer } from "astro-google-fonts-optimizer";
 ---
 
 <Layout pageTitle={pageTitle}>
-  <div class="content">
-    <div class="hero-container">
-      <div class="hero-background"></div>
-      <div class="hero-content">
-        <h1>Welcome to the Clothes Swap Society!</h1>
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="canonical" href="https://clothesswapsociety.com/" />
+    <title>{pageTitle}</title>
+    <GoogleFontsOptimizer
+      url="https://fonts.googleapis.com/css2?family=Inter:wght@500;700;800&display=swap"
+    />
+    <meta
+      name="description"
+      content="Welcome to the Clothes Swap Society! Join us to swap gently used clothing, shoes, and accessories sustainably."
+    />
+    <meta
+      name="keywords"
+      content="clothes swap, sustainable fashion, community, clothing exchange, eco-friendly, reduce waste"
+    />
+  </head>
+  <body>
+    <Header />
+    <div class="content">
+      <div class="hero-container">
+        <div class="hero-background"></div>
+        <div class="hero-content">
+          <h1>Welcome to the Clothes Swap Society!</h1>
+          <p>
+            Clothing swaps (Also called Closwaps) are a fun and sustainable way
+            to refresh your wardrobe without spending money. Bring your gently
+            used clothes and exchange them for new-to-you items! <br />Save
+            money, and save the planet!
+          </p>
+          <div class="hero-buttons">
+            <a class="btn-primary" href="/newsletter">Join the Society</a>
+            <a class="btn-secondary" href="/swaps">Find a Swap</a>
+          </div>
+        </div>
+      </div>
+      <div class="section-container">
+        <h2>About The Society</h2>
         <p>
           You don’t need to become a member to swap, <br />but if you’d like to
           be the first to receive the latest news, <br />you can join the
           Society!
         </p>
-        <div class="hero-buttons">
-          <a class="btn-primary" href="/newsletter">Join the Society</a>
-          <a class="btn-secondary" href="/swaps">Find a Swap</a>
+      </div>
+
+      <div class="how-it-works-section">
+        <div class="how-it-works-image">
+          <Picture
+            src={HowItWorksImage}
+            alt="People at a clothes swap event"
+            widths={[300, 600, 900]}
+            formats={["webp"]}
+            loading={"eager"}
+            fetchpriority={"high"}
+          />
+        </div>
+        <div class="how-it-works-content">
+          <h2>How It Works</h2>
+          <ol>
+            <li>Gather your used clothing (Undamaged and free of stains).</li>
+            <li>
+              Check in your clothes with our volunteers and get <a
+                href="/prepare#pricing">tokens</a
+              >.
+            </li>
+            <li>Browse through the items brought by others.</li>
+            <li>
+              Checkout the clothes with your <a href="/prepare#pricing"
+                >tokens</a
+              >.
+            </li>
+          </ol>
+          <p>
+            <a href="/prepare"
+              >Planning to attend a closwap? <br />Please read the full
+              instructions here.</a
+            >
+          </p>
         </div>
       </div>
+      <Swaps limit={3} />
     </div>
-    <div class="section-container">
-      <h2>Why clothing swaps?</h2>
-      <p>
-        Clothing swaps (Also called Closwaps) are a fun and sustainable way to
-        refresh your wardrobe without spending money. Bring your gently used
-        clothes and exchange them for new-to-you items!
-      </p>
-    </div>
+  </body>
+  <style>
+    .content {
+      display: flex;
+      justify-content: flex-start;
+      flex-direction: column; /* Allow sections to stack */
+      gap: 2rem; /* Add gap between top-level sections */
+    }
 
-    <div class="how-it-works-section">
-      <div class="how-it-works-image">
-        <Picture
-          src={HowItWorksImage}
-          alt="People at a clothes swap event"
-          widths={[300, 600, 900]}
-          formats={["webp"]}
-          loading={"eager"}
-          fetchpriority={"high"}
-        />
-      </div>
-      <div class="how-it-works-content">
-        <h2>How It Works</h2>
-        <ol>
-          <li>Gather your gently used clothing.</li>
-          <li>Check in your clothes with our volunteers and get tokens.</li>
-          <li>Browse through the items brought by others.</li>
-          <li>Checkout the clothes with your tokens.</li>
-        </ol>
-        <p>
-          <a href="/how-it-works"
-            >Click to learn more about how a clothing swap works!</a
-          >
-        </p>
-      </div>
-    </div>
+    /* Hero Section Container */
+    .hero-container {
+      position: relative;
+      width: 100%;
+      margin: auto;
+      background-color: #ffffff; /* White background for the content area */
+      overflow: hidden; /* Ensures rounded corners clip content */
+      display: flex;
+      flex-direction: column; /* Stack content vertically by default */
+    }
 
-    {/* CORRECTED: The Swaps component is now a direct child of .content */}
-    {/* It automatically provides its own background, padding, and layout */}
-    <Swaps limit={3} />
-  </div>
-</Layout>
-<style>
-  .content {
-    display: flex;
-    justify-content: flex-start;
-    flex-direction: column; /* Allow sections to stack */
-    gap: 2rem; /* Add gap between top-level sections */
-  }
+    /* Background Image & Overlay */
+    .hero-background {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-image: url("https://m-creates.com/hero.webp"); /* Placeholder image */
+      background-size: cover;
+      background-position: center;
+      opacity: 0.12; /* Slightly transparent */
+    }
 
-  /* Hero Section Container */
-  .hero-container {
-    position: relative;
-    width: 100%;
-    margin: auto;
-    background-color: #ffffff; /* White background for the content area */
-    overflow: hidden; /* Ensures rounded corners clip content */
-    display: flex;
-    flex-direction: column; /* Stack content vertically by default */
-  }
-
-  /* Background Image & Overlay */
-  .hero-background {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-image: url("https://m-creates.com/hero.webp"); /* Placeholder image */
-    background-size: cover;
-    background-position: center;
-    opacity: 0.12; /* Slightly transparent */
-  }
-
-  /* Content Area */
-  .hero-content {
-    position: relative;
-    z-index: 10; /* Ensure content is above background */
-    padding: 2rem; /* Default padding */
-    text-align: center;
-    color: var(--text-color);
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    min-height: 600px; /* Minimum height for visual balance */
-  }
-
-  /* Heading */
-  .hero-content h1 {
-    font-size: 3rem; /* Large heading */
-    font-weight: 500;
-    margin-bottom: 1rem;
-    line-height: 1.2;
-  }
-
-  /* Paragraph Text */
-  .hero-content p {
-    font-size: 1.125rem; /* Slightly larger paragraph */
-    margin-bottom: 2rem;
-    max-width: 640px; /* Constrain paragraph width for readability */
-  }
-
-  /* Buttons Container */
-  .hero-buttons {
-    display: flex;
-    flex-direction: column; /* Buttons stack on small screens */
-    gap: 1rem; /* Space between buttons */
-    margin-top: 1rem;
-  }
-
-  /* Common Button Styles */
-  .hero-buttons a {
-    padding: 0.8rem 2rem; /* Vertical and horizontal padding */
-    border-radius: 10px; /* Fully rounded pills */
-    font-weight: 500;
-    cursor: pointer;
-    transition: all 0.3s ease; /* Smooth transitions for hover effects */
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Subtle shadow */
-    text-decoration: none; /* Remove underline for links treated as buttons */
-    display: inline-block; /* Allows padding and alignment */
-    text-align: center;
-    font-size: 16px;
-  }
-
-  .section-container {
-    width: 100%;
-    background-color: #ffffff;
-    border-radius: 12px;
-    box-shadow: 0 10px 15px rgba(0, 0, 0, 0.05);
-    padding: 2rem; /* Provides internal spacing around content */
-    text-align: left; /* This is correct for left alignment */
-    color: var(--text-color);
-  }
-
-  .section-container h2 {
-    font-size: 3rem;
-    font-weight: 500; /* Bold */
-    margin-bottom: 1rem;
-    color: var(--text-color);
-  }
-
-  .section-container p {
-    font-size: 1.125rem;
-    line-height: 1.6;
-    max-width: 700px; /* Constrains paragraph width for readability */
-    margin-left: 0;
-    margin-right: 0;
-  }
-  /* How it works section */
-  .how-it-works-section {
-    width: 100%;
-    max-height: 900px;
-    background-color: #f9f7f3; /* Light creamy background from screenshot */
-    border-radius: 12px; /* Consistent rounded corners */
-    box-shadow: 0 10px 15px rgba(0, 0, 0, 0.05); /* Subtle shadow */
-    padding: 2rem; /* Overall padding inside the section */
-    display: flex;
-    flex-direction: column; /* Stack image and text on small screens */
-    align-items: center; /* Horizontally centers content when stacked */
-    gap: 2rem; /* Space between image and text when stacked */
-  }
-
-  .how-it-works-image {
-    max-height: 700px;
-    width: 100%; /* Full width on small screens */
-    border-radius: 8px; /* Slightly less rounded corners for image itself */
-    overflow: hidden; /* Ensures image respects border-radius */
-    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1); /* Subtle shadow for the image box */
-  }
-
-  .how-it-works-image picture,
-  .how-it-works-image img {
-    width: 100%;
-    height: auto;
-    display: block;
-    object-fit: cover; /* Ensures image covers its container without stretching */
-  }
-
-  .how-it-works-content {
-    flex-grow: 1; /* Allows text content to take remaining space */
-    width: 100%; /* Full width on small screens */
-    text-align: left;
-    color: var(--text-color);
-  }
-
-  .how-it-works-content h2 {
-    font-size: 3rem; /* Matches screenshot size */
-    font-weight: 500;
-    margin-bottom: 1.5rem;
-    color: var(--text-color); /* Black color */
-  }
-
-  .how-it-works-content ol {
-    list-style-type: decimal; /* Ensures numbered list */
-    list-style-position: outside; /* Numbers outside the list item box */
-    margin-left: 1.25rem; /* Indent the list */
-    margin-bottom: 1.5rem;
-    color: var(--text-color);
-  }
-
-  .how-it-works-content li {
-    font-size: 1.125rem;
-    line-height: 1.8;
-    margin-bottom: 0.5rem; /* Space between list items */
-    color: var(--text-color);
-  }
-
-  .how-it-works-content li:last-child {
-    margin-bottom: 0;
-  }
-
-  .how-it-works-content p {
-    font-size: 1rem;
-    line-height: 1.6;
-  }
-
-  .how-it-works-content p a {
-    color: var(--text-color); /* Black link color as in screenshot */
-    text-decoration: underline;
-    font-weight: 400;
-  }
-
-  .how-it-works-content p a:hover {
-    text-decoration: none;
-    color: var(--accent-color); /* Hover accent */
-  }
-
-  /* REMOVED ALL THE FOLLOWING REDUNDANT CSS */
-  /* .upcoming-swaps-section { ... } */
-  /* .upcoming-swaps-text-column { ... } */
-  /* .swap-cards-container { ... } */
-  /* .swap-card { ... } */
-  /* .swap-card h3 { ... } */
-  /* .swap-card p { ... } */
-  /* .upcoming-swaps-image-column { ... } */
-  /* .upcoming-swaps-image-column picture, img { ... } */
-
-  /* Responsive Adjustments */
-  @media (min-width: 768px) {
-    /* For medium screens and up */
+    /* Content Area */
     .hero-content {
-      padding: 3rem; /* More padding on larger screens */
+      position: relative;
+      z-index: 10; /* Ensure content is above background */
+      padding: 2rem; /* Default padding */
+      text-align: center;
+      color: var(--text-color);
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      min-height: 600px; /* Minimum height for visual balance */
     }
 
+    /* Heading */
     .hero-content h1 {
-      font-size: 4rem; /* Larger heading */
+      font-size: 3rem; /* Large heading */
+      font-weight: 500;
+      margin-bottom: 1rem;
+      line-height: 1.2;
     }
 
+    /* Paragraph Text */
     .hero-content p {
-      font-size: 1.25rem; /* Larger paragraph */
+      font-size: 1.125rem; /* Slightly larger paragraph */
+      margin-bottom: 2rem;
+      max-width: 640px; /* Constrain paragraph width for readability */
     }
 
+    /* Buttons Container */
     .hero-buttons {
-      flex-direction: row; /* Buttons side-by-side on larger screens */
-      gap: 1.5rem; /* More space between buttons */
+      display: flex;
+      flex-direction: column; /* Buttons stack on small screens */
+      gap: 1rem; /* Space between buttons */
+      margin-top: 1rem;
+    }
+
+    /* Common Button Styles */
+    .hero-buttons a {
+      padding: 0.8rem 2rem; /* Vertical and horizontal padding */
+      border-radius: 10px; /* Fully rounded pills */
+      font-weight: 500;
+      cursor: pointer;
+      transition: all 0.3s ease; /* Smooth transitions for hover effects */
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+      text-decoration: none; /* Remove underline for links treated as buttons */
+      display: inline-block; /* Allows padding and alignment */
+      text-align: center;
+      font-size: 16px;
     }
 
     .section-container {
-      padding: 5rem;
+      width: 100%;
+      background-color: #ffffff;
+      border-radius: 12px;
+      box-shadow: 0 10px 15px rgba(0, 0, 0, 0.05);
+      padding: 2rem; /* Provides internal spacing around content */
+      text-align: left; /* This is correct for left alignment */
+      color: var(--text-color);
     }
 
     .section-container h2 {
       font-size: 3rem;
+      font-weight: 500; /* Bold */
+      margin-bottom: 1rem;
+      color: var(--text-color);
     }
 
     .section-container p {
-      font-size: 1.25rem;
+      font-size: 1.125rem;
+      line-height: 1.6;
+      max-width: 700px; /* Constrains paragraph width for readability */
+      margin-left: 0;
+      margin-right: 0;
     }
-
+    /* How it works section */
     .how-it-works-section {
-      flex-direction: row; /* Side-by-side on larger screens */
-      justify-content: space-between; /* Distributes space between image and text */
-      align-items: center; /* Aligns items to the top within their row */
-      padding: 4rem;
+      width: 100%;
+      max-height: 900px;
+      background-color: #f9f7f3; /* Light creamy background from screenshot */
+      border-radius: 12px; /* Consistent rounded corners */
+      box-shadow: 0 10px 15px rgba(0, 0, 0, 0.05); /* Subtle shadow */
+      padding: 2rem; /* Overall padding inside the section */
+      display: flex;
+      flex-direction: column; /* Stack image and text on small screens */
+      align-items: center; /* Horizontally centers content when stacked */
+      gap: 2rem; /* Space between image and text when stacked */
     }
 
     .how-it-works-image {
-      width: 45%; /* Image takes roughly 45% width on desktop */
+      max-height: 700px;
+      width: 100%; /* Full width on small screens */
+      border-radius: 8px; /* Slightly less rounded corners for image itself */
+      overflow: hidden; /* Ensures image respects border-radius */
+      box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1); /* Subtle shadow for the image box */
+    }
+
+    .how-it-works-image picture,
+    .how-it-works-image img {
+      width: 100%;
+      height: auto;
+      display: block;
+      object-fit: cover; /* Ensures image covers its container without stretching */
     }
 
     .how-it-works-content {
-      width: 50%; /* Text takes roughly 50% width on desktop */
-      margin-left: 50px;
+      flex-grow: 1; /* Allows text content to take remaining space */
+      width: 100%; /* Full width on small screens */
+      text-align: left;
+      color: var(--text-color);
     }
-  }
-</style>
+
+    .how-it-works-content h2 {
+      font-size: 3rem; /* Matches screenshot size */
+      font-weight: 500;
+      margin-bottom: 1.5rem;
+      color: var(--text-color); /* Black color */
+    }
+
+    .how-it-works-content ol {
+      list-style-type: decimal; /* Ensures numbered list */
+      list-style-position: outside; /* Numbers outside the list item box */
+      margin-left: 1.25rem; /* Indent the list */
+      margin-bottom: 1.5rem;
+      color: var(--text-color);
+    }
+
+    .how-it-works-content li {
+      font-size: 1.125rem;
+      line-height: 1.8;
+      margin-bottom: 0.5rem; /* Space between list items */
+      color: var(--text-color);
+    }
+
+    .how-it-works-content li:last-child {
+      margin-bottom: 0;
+    }
+
+    .how-it-works-content p {
+      font-size: 1.125rem;
+      line-height: 1.6;
+    }
+
+    .how-it-works-content a {
+      color: var(--text-color); /* Black link color as in screenshot */
+      text-decoration: underline;
+      font-weight: 400;
+    }
+
+    .how-it-works-content a:hover {
+      text-decoration: none;
+      color: var(--accent-color); /* Hover accent */
+    }
+
+    /* REMOVED ALL THE FOLLOWING REDUNDANT CSS */
+    /* .upcoming-swaps-section { ... } */
+    /* .upcoming-swaps-text-column { ... } */
+    /* .swap-cards-container { ... } */
+    /* .swap-card { ... } */
+    /* .swap-card h3 { ... } */
+    /* .swap-card p { ... } */
+    /* .upcoming-swaps-image-column { ... } */
+    /* .upcoming-swaps-image-column picture, img { ... } */
+
+    /* Responsive Adjustments */
+    @media (min-width: 768px) {
+      /* For medium screens and up */
+      .hero-content {
+        padding: 3rem; /* More padding on larger screens */
+      }
+
+      .hero-content h1 {
+        font-size: 4rem; /* Larger heading */
+      }
+
+      .hero-content p {
+        font-size: 1.25rem; /* Larger paragraph */
+      }
+
+      .hero-buttons {
+        flex-direction: row; /* Buttons side-by-side on larger screens */
+        gap: 1.5rem; /* More space between buttons */
+      }
+
+      .section-container {
+        padding: 5rem;
+      }
+
+      .section-container h2 {
+        font-size: 3rem;
+      }
+
+      .section-container p {
+        font-size: 1.25rem;
+      }
+
+      .how-it-works-section {
+        flex-direction: row; /* Side-by-side on larger screens */
+        justify-content: space-between; /* Distributes space between image and text */
+        align-items: center; /* Aligns items to the top within their row */
+        padding: 4rem;
+      }
+
+      .how-it-works-image {
+        width: 45%; /* Image takes roughly 45% width on desktop */
+      }
+
+      .how-it-works-content {
+        width: 50%; /* Text takes roughly 50% width on desktop */
+        margin-left: 50px;
+      }
+    }
+  </style>
+  <Footer />
+</Layout>
