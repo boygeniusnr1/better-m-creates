@@ -8,7 +8,7 @@ const pageTitle = "Newsletter - Clothes Swap Society";
   <div class="content newsletter-page-content">
     <h1>Newsletter coming soon...</h1>
     <p class="intro-paragraph">
-      Another way to join the club is to <a href="/volunteer">Volunteer!</a>
+      Another way to join the society is to <a href="/volunteer">Volunteer!</a>
     </p>
   </div>
 </Layout>
@@ -56,6 +56,27 @@ const pageTitle = "Newsletter - Clothes Swap Society";
 
   .newsletter-page-content .intro-paragraph a:hover {
     color: #e07b39; /* A slightly different shade on hover if accent is yellow */
+  }
+
+  .input {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem; /* Space between input fields */
+    width: 100%; /* Full width for inputs */
+    justify-content: space-around;
+  }
+
+  .submit-button {
+    margin-top: 0.5rem;
+  }
+
+  .field {
+    width: 400px; /* Full width for input fields */
+    padding: 0.75rem; /* Consistent padding */
+    border: 1px solid #ccc; /* Light border for inputs */
+    border-radius: 8px; /* Rounded corners for inputs */
+    font-size: 1rem; /* Consistent font size */
+    color: var(--text-color); /* Consistent text color */
   }
 
   /* Responsive Adjustments */

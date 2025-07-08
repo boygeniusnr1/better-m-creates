@@ -22,8 +22,10 @@ export const swapEventsDetails = [
         However, we can not gurantee that you take home as many items as you brought in. Since we don't know how many people will attend, and how many items of what size they will bring in, we can not guarantee that there will be something of their liking for everyone to take home.
         In that case, we hope the experience of the rewarding feeling of passing on your favourite piece of clothing to be enjoyed by another person in your community is stead of having to send it off to landfill, will make up for it. 
 
-        Note: This event will be mainly focused on children's clothing, but all ages are welcome to participate.
+        Note: This event will be mainly focused on children's clothing, however, parents may help children to participate.
         <br><br>
+        As this is our first swap event, we will use a different system to keep things simple. When you arrive, you'll get a ticket. When you bring your items, you get stamps on your ticket. When you "buy" items, you hand over your ticket and get the items you chose.<br>
+        The Tasman Bay Textile ResQ will also be joining us at this event. They will be demonstrating how to upcycle clothing, and will be showing some of their upcycled clothing items.<br>
 
 
       </p>
